@@ -1,48 +1,35 @@
-const db = require("../models");
+const connection = require('./connection.js');
 
-// Telling passport we want to use a Local Strategy. In other words, we want login with a username/email and password
-passport.use(
-  new LocalStrategy(
-    // Our user will sign in using an email, rather than a "username"
-    {
-      usernameField: "email"
-    },
-    (email, password, done) => {
-      // When a user tries to sign in this code runs
-      db.User.findOne({
-        where: {
-          email: email
+const orm = {
+  all(tableInput, cb) {
+    const queryString = `SELECT * FROM ${tableInput};`;
+    connection.query(queryString, (err, result) => {
+      if (err) {
+        throw err;
+      }
+      cb(result);
+    });
+  },
+
+  createReview(tableName, colName, value, cb) {
+    const queryString = 'INSERT INTO ?? (??) VALUES (?)';
+    connection.query(query, [tableName, colName, value],
+        (err, result) => {
+            if (err) throw err;
+            cb(result);
         }
-      }).then(dbUser => {
-        // If there's no user with the given email
-        if (!dbUser) {
-          return done(null, false, {
-            message: "Incorrect email."
-          });
-        }
-        // If there is a user with the given email, but the password the user gives us is incorrect
-        else if (!dbUser.validPassword(password)) {
-          return done(null, false, {
-            message: "Incorrect password."
-          });
-        }
-        // If none of the above, return the user
-        return done(null, dbUser);
-      });
+    );
+},
+
+  deleteOne(tableName, conditionCol, conditionVal, cb) {
+        const query = 'DELETE FROM ?? WHERE ?? = ?';
+        connection.query(query, [tableName, conditionCol, conditionVal],
+            (err, result) => {
+                if (err) throw err;
+                cb(result);
+            }
+        );
     }
-  )
-);
+};
 
-// In order to help keep authentication state across HTTP requests,
-// Sequelize needs to serialize and deserialize the user
-// Just consider this part boilerplate needed to make it all work
-passport.serializeUser((user, cb) => {
-  cb(null, user);
-});
-
-passport.deserializeUser((obj, cb) => {
-  cb(null, obj);
-});
-
-// Exporting our configured passport
-module.exports = passport;
+module.exports = orm;
