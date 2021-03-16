@@ -1,0 +1,10 @@
+body {
+    background-image: url("../images/about_background.jpeg");
+    background-color: whitesmoke;
+}
+
+.wrap {
+    padding-top: 5%;
+    padding-right: 20px;;
+    text-align: right;
+}
