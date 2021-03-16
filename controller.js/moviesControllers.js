@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 // Import the model (cat.js) to use its database functions.
-const movies = require('../models/');
+const movies = require('../models/index.js');
 
 // Create all our routes and set up logic within those routes where required.
 router.get('/', (req, res) => {
@@ -16,14 +16,14 @@ router.get('/', (req, res) => {
   });
 });
 
-router.post('/api/?', (req, res) => {
-  review.create(['name', 'sleepy'], [req.body.name, req.body.], (result) => {
+router.post('/api/movies', (req, res) => {
+  movies.create(['name', 'sleepy'], [req.body.name, req.body], (result) => {
     // Send back the ID of the new quote
     res.json({ id: result.insertId });
   });
 });
 
-router.put('/api/?/:id', (req, res) => {
+router.put('/api/movies/:id', (req, res) => {
   const condition = `id = ${req.params.id}`;
 
   console.log('condition', condition);
@@ -46,14 +46,12 @@ router.put('/api/?/:id', (req, res) => {
 router.delete('/api/?/:id', (req, res) => {
   const condition = `id = ${req.params.id}`;
 
-  review.delete(condition, (result) => {
+  movies.delete(condition, (result) => {
     if (result.affectedRows === 0) {
-      // If no rows were changed, then the ID must not exist, so 404
       return res.status(404).end();
     }
     res.status(200).end();
   });
 });
 
-// Export routes for server.js to use.
 module.exports = router;
