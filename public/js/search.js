@@ -26,7 +26,7 @@ searchForm.addEventListener('submit', (e) => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      //.then new api call to the servere to add movie to db
+      //.then new api call to the server to add movie to db
       // dispolay result
       // save to db
   }

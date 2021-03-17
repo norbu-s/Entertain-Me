@@ -1,7 +1,7 @@
 'use strict';
 const orm = require('../config/orm.js');
 
-const cat = {
+const movies = {
   all(cb) {
     orm.all('movies', (res) => cb(res));
   },
