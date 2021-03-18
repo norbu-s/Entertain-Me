@@ -3,7 +3,6 @@ const path = require("path");
 
 module.exports = function(app) {
   app.get("/", (req, res) => {
-    // If the user already has an account send them to the members page
     if (req.length > 0) {
       res.redirect("/index");
     }
@@ -11,7 +10,6 @@ module.exports = function(app) {
   });
 
   app.get("/movie", (req, res) => {
-    // If the user already has an account send them to the members page
     if (req.movieTitle) {
       res.redirect("/movieDetail");
     }
@@ -19,7 +17,6 @@ module.exports = function(app) {
   });
 
   app.get("/watchList", (req, res) => {
-    // If the user already has an account send them to the members page
     if (req.watchList) {
       res.redirect("/watchList");
     }
@@ -27,7 +24,6 @@ module.exports = function(app) {
   });
 
   app.get("/reviewList", (req, res) => {
-    // If the user already has an account send them to the members page
     if (req.reviewList) {
       res.redirect("/reviewList");
     }

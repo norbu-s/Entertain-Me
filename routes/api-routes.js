@@ -4,17 +4,9 @@ const path = require('path');
 // ROUTING
 
 module.exports = (app) => {
-  // app.get("/api/searchmovies/:searchQuery", (req, res) => {
-  //   res.json([])
-  // });
-
-
-  app.get('/api/movies', (req, res) => res.json(movieData));
-
-  app.get('/movies', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/index.html'));
+  app.get("/api/searchmovies/:searchQuery", (req, res) => {
+    res.json([])
   });
-
 
   app.post('/api/movies', (req, res) => {
     if (tableData.length < 0) {
