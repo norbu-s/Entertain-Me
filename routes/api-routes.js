@@ -1,18 +1,23 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
+const path = require('path');
 // ROUTING
 
 module.exports = (app) => {
-  app.get("/api/searchmovies/:searchQuery", (req, res) => {
-    res.json([])
+  // app.get("/api/searchmovies/:searchQuery", (req, res) => {
+  //   res.json([])
+  // });
+
+
+  app.get('/api/movies', (req, res) => res.json(movieData));
+
+  app.get('/movies', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
   });
 
 
   app.post('/api/movies', (req, res) => {
-    // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
-    // It will do this by sending out the value "true" have a table
-    // req.body is available since we're using the body parsing middleware
-    if (tableData.length < 5) {
+    if (tableData.length < 0) {
       tableData.push(req.body);
       res.json(true);
     } else {
@@ -26,9 +31,7 @@ module.exports = (app) => {
 
   app.post('/api/clear', (req, res) => {
     // Empty out the arrays of data
-    tableData.length = 0;
-    waitListData.length = 0;
-
+    movieData.length = 0;
     res.json({ ok: true });
   });
 };
