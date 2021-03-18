@@ -34,6 +34,34 @@ comments VARCHAR(255) NOT NULL,
 PRIMARY KEY (id), 
 FOREIGN KEY (movie_id) REFERENCES movies(id) 
 );
+USE entertainMedb;
+DROP TABLE movies;
 
-
+CREATE TABLE movies(
+id INT NOT NULL AUTO_INCREMENT,
+title VARCHAR(255) NOT NULL,
+year INT NOT NULL,
+rated VARCHAR(255) NOT NULL,
+released VARCHAR(255) NOT NULL,
+runtime INT NOT NULL,
+genre VARCHAR(255) NOT NULL,
+director VARCHAR(255) NOT NULL,
+writer VARCHAR(255) NOT NULL,
+actors VARCHAR(255) NOT NULL,
+plot VARCHAR(255) NOT NULL,
+language VARCHAR(255) NOT NULL,
+country VARCHAR(255) NOT NULL,
+awards VARCHAR(255) NOT NULL,
+poster VARCHAR(255) NOT NULL,
+ratings VARCHAR(255) NOT NULL,
+metascore INT NOT NULL,
+imdbID DECIMAL(10,3),
+type VARCHAR(255) NOT NULL,
+dvd VARCHAR(255),
+box_office INT,
+production VARCHAR(255),
+website VARCHAR(255),
+response VARCHAR(255), 
+PRIMARY KEY (id)
+);
 
