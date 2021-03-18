@@ -1,7 +1,7 @@
 
   //Code for when page is loaded
   $(document).ready(function(){
-    fetch("/api/review-list").then(function(response){
+    fetch("/api/reviewList").then(function(response){
         if (response.length>0){
           displayMovieInfo(response)  
         }
@@ -54,7 +54,7 @@ addBtn.addEventListener('click', (e) => {
   };
 
   // Send POST request using the fetch API
-  fetch('/api/review-list', {
+  fetch('/api/reviewList', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -76,6 +76,7 @@ addBtn.addEventListener('click', (e) => {
   document.getElementById('rating').value = '';
 });
 
-  
+  // Add new review
+  // Grab review table and pass back to front end
   
   
