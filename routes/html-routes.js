@@ -1,29 +1,32 @@
 // Requiring path to so we can use relative routes to our HTML files
 const path = require("path");
 
-// Requiring our custom middleware for checking if a user is logged in
-const isAuthenticated = require("../config/middleware/isAuthenticated");
-
 module.exports = function(app) {
   app.get("/", (req, res) => {
-    // If the user already has an account send them to the members page
-    if (req.user) {
-      res.redirect("/members");
+    if (req.length > 0) {
+      res.redirect("/index");
     }
-    res.sendFile(path.join(__dirname, "../public/signup.html"));
+    res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
-  app.get("/login", (req, res) => {
-    // If the user already has an account send them to the members page
-    if (req.user) {
-      res.redirect("/members");
+  app.get("/movie", (req, res) => {
+    if (req.movieTitle) {
+      res.redirect("/movieDetail");
     }
-    res.sendFile(path.join(__dirname, "../public/login.html"));
+    res.sendFile(path.join(__dirname, "../public/movie.html"));
   });
 
-  // Here we've add our isAuthenticated middleware to this route.
-  // If a user who is not logged in tries to access this route they will be redirected to the signup page
-  app.get("/members", isAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/members.html"));
+  app.get("/watchList", (req, res) => {
+    if (req.watchList) {
+      res.redirect("/watchList");
+    }
+    res.sendFile(path.join(__dirname, "../public/watch.html"));
+  });
+
+  app.get("/reviewList", (req, res) => {
+    if (req.reviewList) {
+      res.redirect("/reviewList");
+    }
+    res.sendFile(path.join(__dirname, "../public/reviewList.html"));
   });
 };
