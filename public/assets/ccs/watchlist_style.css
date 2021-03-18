@@ -1,0 +1,24 @@
+body {
+    background-image: url("../images/homepage.png");
+    background-color: whitesmoke;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right;
+    
+}
+
+.btn {
+    margin: 5%; 
+}
+
+.image-txt-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin: 5%;
+  }
+
+.card {
+    margin-left: 5%;
+    text-align: center;
+}
