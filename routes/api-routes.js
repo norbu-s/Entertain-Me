@@ -1,9 +1,13 @@
-// Requiring our models and passport as we've configured it
+// Requiring our models 
 const db = require("../models");
 const path = require('path');
 // ROUTING
 
 module.exports = (app) => {
+  app.get("/api/review-list", (req, res) => {
+    res.json([])
+  });
+
   app.get("/api/searchmovies/:searchQuery", (req, res) => {
     res.json([])
   });
