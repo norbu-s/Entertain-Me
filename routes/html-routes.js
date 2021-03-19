@@ -1,35 +1,22 @@
 // Requiring path to so we can use relative routes to our HTML files
 const path = require("path");
-const http = require("http");
-const axios = require("axios");
+const https = require("https");
 
 module.exports = async function (app) {
   app.get("/", (req, res) => {
-
-    const axios = require("axios");
-    async function getMovie() {
-        return axios.get("https://www.omdbapi.com/?t=romancing+the+stone&y=&plot=short&apikey=trilogy");
-    }
-    res = getMovie();
+    https
+    .get("https://www.omdbapi.com/?t=&plot=short&apikey=trilogy", res => {
+      let data ="";  
+      console.log("res",res)  
+      res.on("data", chunk => {
+        data += chunk;
+        console.log("chunk: ", chunk)
+    });
+  })
+  res.on("end",()=> {
+    let url = JSON.parse(data);
   });
 }
-
-// module.exports = function(app) {
-//   app.get("/", (req, res) => {
-//     console.log("I am here")
-//     http
-//     .get("https://www.omdbapi.com/?t=romancing+the+stone&y=&plot=short&apikey=trilogy", res => {
-//       let data ="";
-//       res.on("data", chunk => {
-//         data += chunk;
-//     });
-//   })
-//   res.on("end",()=> {
-//     let url = JSON.parse(data).title;
-//     console.log("chunk: ", chunk)
-//   });
-// });
-// }
 
 // {
 //   if (req.length > 0) {
