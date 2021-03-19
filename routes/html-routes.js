@@ -2,7 +2,7 @@
 const path = require("path");
 const https = require("https");
 
-module.exports = function(app) {
+module.exports = async function (app) {
   app.get("/", (req, res) => {
     https
     .get("https://www.omdbapi.com/?t=&plot=short&apikey=trilogy", res => {
@@ -16,7 +16,6 @@ module.exports = function(app) {
   res.on("end",()=> {
     let url = JSON.parse(data);
   });
-});
 }
 
 // {
