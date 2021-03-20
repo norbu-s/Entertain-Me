@@ -1,3 +1,4 @@
+
 // Wait for the DOM to completely load before we run our JS
 document.addEventListener('DOMContentLoaded', (e) => {
   if (e) {
@@ -133,7 +134,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
   console.log('handleFormSubmit -> newReview', newReview);
 
 
-
 const handleFormSubmit = (e) => {
   e.preventDefault();
   if (!review.value || !rating.value) {
@@ -166,5 +166,4 @@ const handleFormSubmit = (e) => {
   };
 
 });
-
 

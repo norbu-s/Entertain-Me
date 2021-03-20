@@ -4,7 +4,7 @@ const path = require('path');
 // ROUTING
 
 module.exports = (app) => {
-  app.get("/api/review-list", (req, res) => {
+  app.get("/api/reviewList", (req, res) => {
     res.json([])
   });
 

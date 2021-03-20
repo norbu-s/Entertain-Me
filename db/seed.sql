@@ -1,3 +1,3 @@
-DROP TABLE movies;
-USE entertainMedb;
+USE entertain;
+
 SELECT * FROM movies;
