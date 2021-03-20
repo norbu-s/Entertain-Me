@@ -148,7 +148,7 @@ const handleFormSubmit = (e) => {
   submitForm.addEventListener('submit', handleFormSubmit);
 
   const submitReview = (post) => {
-    fetch('/api/reviews', {
+    fetch('/api/posts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

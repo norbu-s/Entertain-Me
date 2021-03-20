@@ -14,21 +14,10 @@ module.exports = (app) => {
     res.sendFile(path.join(__dirname, '../public/review.html'));
   });
 
-  // all route loads the all.html page, where all books in the db are displayed
-//   app.get('/all', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../public/all.html'));
-//   });
-
-//   // short route loads the short.html page, where short books in the db are displayed
-//   app.get('/short', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../public/short.html'));
-//   });
-
-//   // long route loads the long.html page, where long books in the db are displayed
-//   app.get('/long', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../public/long.html'));
-//   });
-// };
+  app.get('/movies', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
+  });
+};
 
 
 
