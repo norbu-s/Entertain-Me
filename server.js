@@ -12,8 +12,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Import routes and give the server access to them.
-require("./routes/api-routes")(app);
-require("./routes/html-routes")(app);
+require("./app/routes/api-routes")(app);
+require("./app/routes/api-routes")(app);
 
 // app.use(routes);
 
