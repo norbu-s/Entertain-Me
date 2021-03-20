@@ -14,7 +14,7 @@ sequelize.authenticate().then(() => {
 });
 
 // Requiring our models for syncing
-const db = require('./models');
+const db = require('./app/models');
 
 const app = express();
 const PORT = process.env.PORT || 8080;

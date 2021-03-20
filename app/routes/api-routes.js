@@ -1,5 +1,5 @@
 // Requiring our models 
-const Movies = require("../models/movies");
+const Movies = require("../models/index.js");
 const { Op } = require('sequelize');
 // ROUTING
 
