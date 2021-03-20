@@ -1,33 +1,36 @@
-// Requiring our models 
-const db = require("../models");
-const path = require('path');
-// ROUTING
+const connection = require('../config/config.json');
 
+// Routes
+// =============================================================
 module.exports = (app) => {
-  app.get("/api/reviewList", (req, res) => {
-    res.json([])
+  // Serach Movie by title
+  app.get('/api/searchTitle', (req, res) => {
+    const dbQuery = 'SELECT title FROM movies where title = ?';
+    connection.query(dbQuery, (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
   });
 
-  app.get("/api/searchmovies/:searchQuery", (req, res) => {
-    res.json([])
-  });
+  // Add a review
+  app.post('/api/new', (req, res) => {
+    console.log('Review Data:');
+    console.log(req.body);
 
-  app.post('/api/movies', (req, res) => {
-    if (tableData.length < 0) {
-      tableData.push(req.body);
-      res.json(true);
-    } else {
-      waitListData.push(req.body);
-      res.json(false);
-    }
-  });
+    const dbQuery =
+      'INSERT INTO review (score, comment) VALUES (?)';
 
-  // I added this below code so you could clear out the table while working with the functionality.
-  // Don"t worry about it!
-
-  app.post('/api/clear', (req, res) => {
-    // Empty out the arrays of data
-    movieData.length = 0;
-    res.json({ ok: true });
+    connection.query(
+      dbQuery,
+      [req.body.score, req.body.body, req.body.review],
+      (err, result) => {
+        if (err) throw err;
+        if (result) {
+          console.log('Review Successfully Saved!');
+          res.json(req.body);
+        }
+      }
+    );
   });
 };
+

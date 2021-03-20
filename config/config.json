@@ -2,14 +2,15 @@
   "development": {
     "username": "root",
     "password": "yourRootPassword",
-    "database": "entertainMedb",
+    "database": "entertain",
     "host": "127.0.0.1",
+    "port": 8080,
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "yourRootPassword",
-    "database": "entertainMedb",
+    "password": null,
+    "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

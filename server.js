@@ -1,20 +1,24 @@
-const express = require('express');
-const Sequelize = require('sequelize'); //review page
+const express = require("express");
+const Sequelize = require("sequelize"); //review page
 
 //created connection to mySQL entertainMe (review page)
-const path = 'mysql://root:yourRootPassword@localhost:3306/entertainMedb';
-const sequelize = new Sequelize(path, { operatorsAliases: false });
+const path = "mysql://root:yourRootPassword@localhost:3306/entertainMedb";
+const sequelize = new Sequelize(path, { operatorsAliases: 0 });
 
-sequelize.authenticate().then(() => {
-  console.log('Connection established successfully.');
-}).catch(err => {
-  console.error('Unable to connect to the database:', err);
-}).finally(() => {
-  sequelize.close();
-});
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Connection established successfully.");
+  })
+  .catch((err) => {
+    console.error("Unable to connect to the database:", err);
+  })
+  .finally(() => {
+    sequelize.close();
+  });
 
 // Requiring our models for syncing
-const db = require('./models');
+const db = require("./models");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -25,6 +29,8 @@ const PORT = process.env.PORT || 8080;
 // Parse application body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(express.static("app/public"));
 
 // Import routes and give the server access to them.
 require("./routes/api-routes")(app);
