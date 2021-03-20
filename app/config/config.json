@@ -9,13 +9,8 @@
   },
   "test": {
     "username": "root",
-<<<<<<< HEAD:config/config.json
     "password": null,
     "database": "database_test",
-=======
-    "password": "yourRootPassword",
-    "database": "entertain",
->>>>>>> 577cb01c40adc4acb9e4220ac3303040f23c597b:app/config/config.json
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

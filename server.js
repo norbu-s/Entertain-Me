@@ -18,11 +18,7 @@ sequelize
   });
 
 // Requiring our models for syncing
-<<<<<<< HEAD
 const db = require("./models");
-=======
-const db = require('./app/models');
->>>>>>> 577cb01c40adc4acb9e4220ac3303040f23c597b
 
 const app = express();
 const PORT = process.env.PORT || 8080;
