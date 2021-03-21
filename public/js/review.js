@@ -159,7 +159,7 @@ const handleFormSubmit = (e) => {
       .then((response) => response.json())
       .then((data) => {
         console.log('Success in submitting post:', data);
-        window.location.href = '/review';
+        window.location.href = './review.html';
       })
       .catch((error) => {
         console.error('Error:', error);

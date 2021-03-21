@@ -1,25 +1,7 @@
-module.exports = (sequelize, DataTypes) => {
+
+  
+  module.exports = (sequelize, DataTypes) => {
     const Review = sequelize.define('Review', {
-      review: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-        validate: {
-          len: [1],
-        },
-      },
-      rating: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [1],
-        },
-      },
-     
-    });
-    return Review;
-  };
-  console.log("review.js");module.exports = (sequelize, DataTypes) => {
-    const Post = sequelize.define('Post', {
       title: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -46,6 +28,6 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: 'Personal',
       },
     });
-    return Post;
+    return Review;
   };
   
