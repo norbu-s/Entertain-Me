@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Review - Express</title>
+  <title>EntertainMe | Completed Reviews</title>
   <!-- Latest compiled and minified CSS & JS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/flatly/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
@@ -14,18 +14,25 @@
     <div class="row mt-4">
       <div class="col-md-4">
         <div class="form-group">
-          <select class="custom-select" id="category">
-            <option selected value="">All Categories</option>
-            <option value="Personal">Personal</option>
-            <option value="Product Review">Product Review</option>
-            <option value="Political">Political</option>
-          </select>
+
+          <div class="form-group">
+            <label for="category">Select Source:</label>
+            <select class="custom-select" id="category">
+              <option value="cinema">Cinema</option>
+              <option value="streaming">Streaming</option>
+              <option value="dvd">DVD</option>
+            </select>
+          </div>
         </div>
       </div>
-      <div class="col-md-2">
-        <a class="btn btn-light" href="/cms">New Review</a>
-      </div>
     </div>
+
+
+    <div class="col-md-5">
+      <a class="btn btn-primary submit btn-lg" href="cms.html">Add Review</a>
+      <a class="btn btn-success submit btn-lg" href="index.html">Search Movie</a>
+    </div>
+
     <div class="row">
       <div class="col-md-12 blog-container">
       </div>

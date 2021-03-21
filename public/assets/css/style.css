@@ -1,17 +1,47 @@
-form.signup,
-form.login {
-  margin-top: 50px;
+.navbar-nav > li{
+  padding-left:30px;
+  padding-right:30px;
 }
 
-.jumbotron {
-  background-color: white;
-  background-image: url("https://images.squarespace-cdn.com/content/v1/57d2dbc944024362fbb5d772/1493398261355-A4ETKRBTBGJW1DLIF4JH/ke17ZwdGBToddI8pDm48kE3MUHZ9vSBnmdfJVjOam8NZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVHn-b2jS82togAvT3SMGPjv4M_bMe06SUd9e8Y6HyyjyJMLq3B1ybsXSjkTL0-UNSo/film");
-  background-repeat: no-repeat;
-  padding-left: 50%;
+.collapse {
+  margin-left: 40%;
 }
 
-.btn {
-  margin: 5%; 
+#home {
+  border: 2px dotted #00A9DE; 
+  border-radius: 5px;
+  width: 150%;
+  
+}
+
+#home:hover {
+  border: 3px solid #FFAD48; 
+  border-radius: 5px;
+  width: 150%;
+}
+
+#review-nav {
+  border: 2px dotted #82C295;
+  border-radius: 5px;
+  width: 150%;
+}
+
+#review-nav:hover {
+  border: 3px solid #CF7046;
+  border-radius: 5px;
+  width: 150%;
+}
+
+#about {
+  border: 2px dotted orange;
+  border-radius: 5px;
+  width: 150%;
+}
+
+#about:hover {
+  border: 3px solid #655B58 ;
+  border-radius: 5px;
+  width: 150%;
 }
 
 .image-txt-container {
@@ -20,3 +50,38 @@ form.login {
   flex-direction: row;
   margin: 5%;
 }
+
+@media only screen and (max-width: 480px) {
+  .form-group {
+    width: 100%;
+  }
+
+  .collapse {
+    margin-right: 30%;
+  }
+
+  #home {
+    margin-bottom: 10%;
+  }
+
+  #review-nav {
+    margin-bottom: 10%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .form-group {
+    width: 100%;
+  }
+
+  .collapse {
+    margin-right: 30%;
+  }  
+
+  #home {
+    margin-bottom: 20%;
+  }
+
+  #review-nav {
+    margin-bottom: 20%;
+  }
