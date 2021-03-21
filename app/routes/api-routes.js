@@ -4,6 +4,21 @@ const db = require('../models');
 // Routes
 // =============================================================
 module.exports = (app) => {
+  // GET route for getting all of the posts
+  app.get('/api/posts/', (req, res) => {
+    db.Post.findAll({}).then((dbPost) => res.json(dbPost));
+  });
+
+  // Get route for returning posts of a specific category
+  app.get('/api/posts/category/:category', (req, res) => {
+    db.Post.findAll({ // GET * FROM posts WHERE category = req.params.category
+      where: {
+        category: req.params.category,
+      },
+    }).then((dbPost) => {
+      res.json(dbPost);
+    });
+  });
 
   // Get route for retrieving a single post
   app.get('/api/posts/:id', (req, res) => {
@@ -19,7 +34,8 @@ module.exports = (app) => {
     console.log(req.body);
     db.Post.create({
       title: req.body.title,
-      body: req.body.body,
+      review: req.body.review,
+      rating: req.body.rating,
       category: req.body.category,
     }).then((dbPost) => res.json(dbPost));
   });
@@ -33,7 +49,7 @@ module.exports = (app) => {
     }).then((dbPost) => res.json(dbPost));
   });
 
-  // PUT route for updating posts
+    // PUT route for updating posts
   app.put('/api/posts', (req, res) => {
     db.Post.update(req.body, {
       where: {
