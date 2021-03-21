@@ -43,7 +43,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       category: {
         type: DataTypes.STRING,
+
         defaultValue: 'cinema',
+
       },
     });
     return Post;
