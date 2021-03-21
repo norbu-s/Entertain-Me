@@ -22,15 +22,21 @@ document.addEventListener("DOMContentLoaded", () => {
         method: "GET"
       }).then(function(response) {
         var movieDiv = $("<div class='movie'>");
-        var rating = response.Rated;
-        var pOne = $("<p>").text("Rating: " + rating);
+        var genre = response.Genre;
+        var pOne = $("<p>").text("Genre: " + genre);
         movieDiv.append(pOne);
-        var released = response.Released;
-        var pTwo = $("<p>").text("Released: " + released);
-        movieDiv.append(pTwo);
         var plot = response.Plot;
-        var pThree = $("<p>").text("Plot: " + plot);
+        var pTwo = $("<p>").text("Plot: " + plot);
+        movieDiv.append(pTwo);
+        var director = response.Director;
+        var pThree = $("<p>").text("Director: " + director);
         movieDiv.append(pThree);
+        var actors = response.Actors;
+        var pFour = $("<p>").text("Actors: " + actors);
+        movieDiv.append(pFour);
+        var year = response.Year;
+        var pFive = $("<p>").text("Year: " + year);
+        movieDiv.append(pFive);
         var imgURL = response.Poster;
         var image = $("<img>").attr("src", imgURL);
         movieDiv.append(image);
@@ -82,3 +88,5 @@ document.addEventListener("DOMContentLoaded", () => {
     // Calling the renderButtons function to display the initial buttons
     renderButtons();
   });
+
+  
