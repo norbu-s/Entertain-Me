@@ -11,7 +11,7 @@ module.exports = (app) => {
   });
 
   app.get('/cms', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/cms.html'));
+    res.sendFile(path.join(__dirname, './public/review.html'));
   });
 
   // blog route loads blog.html
@@ -19,3 +19,4 @@ module.exports = (app) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
   });
 };
+
