@@ -10,20 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const hide = (el) => {
     el.style.display = "none";
   };
-  const removeMovie = (e) => {
-    const movieId = e.target.dataset.id;
-
-    fetch(`/api/movie/${movieId}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then(() => {
-      console.log("deleted movie");
-      e.target.parentElement.remove();
-    });
-  };
-
+  
   // Function to render the movie after getting data from our API
   const renderMovies = (data) => {
     if (data.length) {
@@ -31,41 +18,34 @@ document.addEventListener("DOMContentLoaded", () => {
       statsEl.innerHTML = "";
       show(statsEl);
 
-      data.forEach(({ title, author, genre, pages, id }, i) => {
+      data.forEach(({ title, actors, genre, year, }, i) => {
         const moviesDiv = document.createElement("div");
 
         // Create the elements to show movie data
         const titleEl = document.createElement("h2");
-        const actorEl = document.createElement("h6");
+        const actorsEl = document.createElement("h6");
         const genreEl = document.createElement("h6");
         const yearEl = document.createElement("h6");
 
-        // Create the delete button
-        const deleteBtn = document.createElement("button");
-        deleteBtn.classList.add("delete");
-        deleteBtn.setAttribute("data-id", id);
+
 
         // Add text to the elements we just created
         titleEl.textContent = `${i + 1} ${title}`;
-        actorEl.textContent = `Actor: ${actor}`;
+        actorsEl.textContent = `actors: ${actors}`;
         genreEl.textContent = `Genre: ${genre}`;
         yearEl.textContent = `Year: ${year}`;
-        deleteBtn.textContent = "DELETE MOVIE";
+
 
         // Append stuff to the new div
         moviesDiv.appendChild(titleEl);
-        moviesDiv.appendChild(actorEl);
+        moviesDiv.appendChild(actorsEl);
         moviesDiv.appendChild(genreEl);
         moviesDiv.appendChild(yearEl);
-        moviesDiv.appendChild(deleteBtn);
 
         statsEl.appendChild(moviesDiv);
       });
 
-      const deleteBtns = document.querySelectorAll(".delete");
-      deleteBtns.forEach((button) => {
-        button.addEventListener("click", removeMovie);
-      });
+
     }
   };
 
