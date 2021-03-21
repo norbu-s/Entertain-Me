@@ -1,4 +1,5 @@
 
+var app = connect().use(connect.static(__dirname + '/public'));
 // Wait for the DOM to completely load before we run our JS
 document.addEventListener('DOMContentLoaded', (e) => {
   if (e) {
