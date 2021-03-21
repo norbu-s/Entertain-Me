@@ -29,15 +29,18 @@
           <a class="navbar-brand" href="#"><img src="../assets/images/logo_v2.png" alt="EntertainMe"
                   style="width: 200px;" />
           </a>
-  
-  
+
+
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
               aria-controls="navbarToggleExternalContent" aria-expanded="true" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
           </button>
-  
+
           <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="/">Home</a>
+                  </li>
                   <li class="nav-item active">
                       <a class="nav-link" href="review.html">Review</a>
                   </li>
@@ -54,16 +57,32 @@
             <div class="flex-column">    
               <h1>Find the movie to suit your mood...</h1>
                <img class="home-image" src="../public/assets/images/homepage.png" alt="homepage"/> <!--find a background image-->
-                <form id="home-form" method="POST">
-                    <input class="home-search-input" type="text" placeholder="Search for a movie title" name="search-movie-home" id="search-movie-home" /> <!--search functionality-->
-                    <button type="submit">Search</button>
-                  </form>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="card mb-4">
+                    <div class="card-header">
+                      Movie Search
+                    </div>
+                    <div class="card-body">
+                      <input type="text" id="movie-search" class="form-control">
+                      <br>
+                      <div class="text-right">
+                        <button class="btn btn-primary btn-md" id="search-btn">
+                          <span class="fa fa-search"></span> Search</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
+          </div>
+
+       
+  
 
        
     
-    <!-- </div> -->
+
     
 
 
