@@ -44,6 +44,7 @@
   width: 150%;
 }
 
+
 .image-txt-container {
   display: flex;
   align-items: center;
@@ -85,3 +86,4 @@
   #review-nav {
     margin-bottom: 20%;
   }
+}
