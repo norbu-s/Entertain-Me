@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
+
+.about-container {
+    font-family: 'Handlee', cursive;
+}
+
+.header-image {
+    position: absolute;
+    float: left;
+    padding-top: 10%;
+}
+
+.lead {
+    margin-left: 20%;
+    margin-top: 20px;
+}
