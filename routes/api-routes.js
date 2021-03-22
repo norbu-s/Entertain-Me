@@ -29,14 +29,15 @@ module.exports = (app) => {
     }).then((dbPost) => res.json(dbPost));
   });
 
-  // POST route for saving a new post
-  app.post('/api/movies', (req, res) => {
+  // POST route for saving a new review
+  app.post('/api/posts', (req, res) => {
     console.log(req.body);
     db.Post.create({
       title: req.body.title,
       review: req.body.review,
       rating: req.body.rating,
-      category: req.body.category,
+      source: req.body.source,
+      author: req.body.author,
     }).then((dbPost) => res.json(dbPost));
   });
 
