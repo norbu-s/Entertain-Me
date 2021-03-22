@@ -13,7 +13,7 @@
       crossorigin="anonymous"
     /> 
     <link rel="stylesheet" href="https://use.typekit.net/ifi5zvx.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/review_style.css">
     <title>EntertainMe</title>
    </head>
 <body>
@@ -48,38 +48,67 @@
   
     <!-- Start of Content  -->
     <br>
-    <img src="./assets/images/review.png">
-    <br>
-    <div class="container">
-      <div class="d-flex justify-content-center home-content">
-        <div class="flex-column">    
-          <h1>Find the movie to suit your mood...</h1>
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="card mb-4">
-                <div class="card-header">
-                  Movie Search
-                </div>
-                <div class="card-body">
-                  <div id="buttons-view"></div>
-                    <form id="movie-form">
-                      <label for="movie-input"></label>
-                      <input type="text" placeholder="Search for a movie Title" id="movie-input">
-                      <br>
-                      <input id="add-movie" type="submit" value="Search">
-                      </form>
-                      <div id="movies-view"></div>
-                      <button id="add-review" type="submit" label="Add to Review"></button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-4">
+        <div class="header">
+          <h1>Movie Hub</h1>
+          <br>
+          <h4>Find the movie, save it to your list and review it</h4>
         </div>
       </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="./js/search.js"></script> 
-</body>
+      <div class="col-md-3"></div>
+        <img src="./assets/images/homepage.png" alt="Watch a movie" style="width: 400px;"/>
+      </div>
+  </div>
+</div>
+    <br>
+  
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-3 form-group">
+          <label for="search">Searching for a movie will add it to your list...:</label>
+          <input type="text" class="form-control" id="search-term"> 
+          <button type="submit" class="btn btn-primary" id="run-search">
+          <i class="fa fa-search"></i> Search</button>
+          <button type="submit" class="btn btn-secondary" id="clear-search">
+          Clear History</button>
+          <!--review list button-->
+          <a href="cms.html" id="review-page">
+            <button type="submit" class="btn btn-success" >Review My Movies </button>
+          </a>
+
+          <br></br>
+          <h3 class="display-8">My Movie List</h3>
+          <div class="buttons-view"></div>
+
+        </div>
+
+      <!--Main Section with Movie Info-->
+      <div class="col-md-9">
+          <div class= "row">
+              <div class="col-md-5 search-data">
+              </div>
+          </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+   
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./js/search.js"></script>
+  </body>
 
 </html>
 

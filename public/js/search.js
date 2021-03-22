@@ -1,92 +1,114 @@
-// Wait for the DOM to completely load before we run our JS
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOM loaded! 🚀");
 
-  // Helper function for showing element
-  const show = (el) => {
-    el.style.display = "block";
-  };
+var searchText = $(".search-data")
+var moviesHistory = []
+var movie
 
-  const hide = (el) => {
-    el.style.display = "none";
-  };
 
-  var movies =[];
-  
-    function displayMovieInfo() {
-  
-      var movie = $(this).attr("data-name");
-      var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
-      $.ajax({
+// Function to set movies from MoviesHistory array into local storage
+function saveMovies() {
+        localStorage.setItem("movies", JSON.stringify(moviesHistory));
+}
+
+
+
+// Function to render buttons based on what is in moviesHistory array
+function renderButtons() {
+    $(".buttons-view").empty();
+    for (var i = 0; i < moviesHistory.length; i++) {
+        var a = $("<button>");
+        a.addClass("btn btn-danger movie-btn");
+        a.attr("data-Title", moviesHistory[i]);
+        a.text(moviesHistory[i]);
+        $(".buttons-view").prepend(a);
+    }
+}
+
+
+
+
+// Function to display movie info
+function displayMovieInfo() {
+   
+    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
+    
+    $.ajax({
         url: queryURL,
         method: "GET"
-      }).then(function(response) {
-        var movieDiv = $("<div class='movie'>");
-        var genre = response.Genre;
-        var pOne = $("<p>").text("Genre: " + genre);
-        movieDiv.append(pOne);
-        var plot = response.Plot;
-        var pTwo = $("<p>").text("Plot: " + plot);
-        movieDiv.append(pTwo);
-        var director = response.Director;
-        var pThree = $("<p>").text("Director: " + director);
-        movieDiv.append(pThree);
-        var actors = response.Actors;
-        var pFour = $("<p>").text("Actors: " + actors);
-        movieDiv.append(pFour);
-        var year = response.Year;
-        var pFive = $("<p>").text("Year: " + year);
-        movieDiv.append(pFive);
-        var imgURL = response.Poster;
-        var image = $("<img>").attr("src", imgURL);
-        movieDiv.append(image);
-        $("#movies-view").prepend(movieDiv);
-      })
+    }).then(function (response) {
+            $(".search-data").html("")
+
+            var movieDiv = $("<div class='movie'>")
+            movieDiv.html("<h4>You Want to Review</h4><br>")
+            searchText.prepend(movieDiv)
+          
+            var title = response.Title;
+            var pOne = $("<h2>").text(title);
+
+            var genre = response.Genre;
+            var pTwo = $("<p>").text("Genre: " + genre);
+            movieDiv.append(pOne);
+            var plot = response.Plot;
+            var pThree = $("<p>").text("Plot: " + plot);
+            movieDiv.append(pTwo);
+            var director = response.Director;
+            var pFour = $("<p>").text("Director: " + director);
+            movieDiv.append(pThree);
+            var actors = response.Actors;
+            var pFive = $("<p>").text("Actors: " + actors);
+            movieDiv.append(pFour);
+            var year = response.Year;
+            var pSix = $("<p>").text("Year: " + year);
+            movieDiv.append(pFive);
+            var imgURL = response.Poster;
+            var image = $("<img>").attr("src", imgURL);
+            movieDiv.append(image);
+            
+      
+          
+            if (moviesHistory.includes(response.Title) === false) {
+                moviesHistory.push(response.Title)
+            }
+            
+            renderButtons()
+            saveMovies()
+        })
+};
+
+
+//On click event listener for search button
+$("#run-search").on("click", function () {
+    movie = $("#search-term").val()
+    displayMovieInfo()
+
+})
+
+//On click event listener for movie buttons
+$(document).on("click", ".movie-btn", function () {
+    movie = $(this).attr("data-Title");
+    displayMovieInfo()
+
+})
+
+//On click event listener for clear search results button
+$("#clear-search").on("click", function (){
+localStorage.clear("movies")
+moviesHistory = []
+$(".buttons-view").empty()
+//refresh page
+location.reload()
+})
+
+
+
+
+//To run when document loads (if/else statement that will pull from local storage only if the value is not "null")
+$(document).ready(function() {
+    if(localStorage.getItem("movies") !== null) {
+        var savedMovie = localStorage.getItem("movies");
+        var pushMovies = JSON.parse(savedMovie)
+        moviesHistory = moviesHistory.concat(pushMovies)
     }
 
-
-    // Function for displaying movie data
-    function renderButtons() {
-  
-      // Deleting the movies prior to adding new movies
-      // (this is necessary otherwise you will have repeat buttons)
-      $("#buttons-view").empty();
-  
-      // Looping through the array of movies
-      for (var i = 0; i < movies.length; i++) {
-  
-        // Then dynamicaly generating buttons for each movie in the array
-        // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
-        var a = $("<button>");
-        // Adding a class of movie-btn to our button
-        a.addClass("movie-btn");
-        // Adding a data-attribute
-        a.attr("data-name", movies[i]);
-        // Providing the initial button text
-        a.text(movies[i]);
-        // Adding the button to the buttons-view div
-        $("#buttons-view").append(a);
-      }
-    }
-  
-    // This function handles events where a movie button is clicked
-    $("#add-movie").on("click", function(event) {
-      event.preventDefault();
-      // This line grabs the input from the textbox
-      var movie = $("#movie-input").val().trim();
-  
-      // Adding movie from the textbox to our array
-      movies.push(movie);
-  
-      // Calling renderButtons which handles the processing of our movie array
-      renderButtons();
-    });
-  
-    // Adding a click event listener to all elements with a class of "movie-btn"
-    $(document).on("click", ".movie-btn", displayMovieInfo);
-  
-    // Calling the renderButtons function to display the initial buttons
-    renderButtons();
-  });
-
-  
+    //render buttons
+    renderButtons()
+  })
