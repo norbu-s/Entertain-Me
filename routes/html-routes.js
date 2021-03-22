@@ -7,7 +7,7 @@ module.exports = (app) => {
 
   // index route loads view.html
   app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/blog.html'));
+    res.sendFile(path.join(__dirname, '../public/index.html'));
   });
 
   app.get('/cms', (req, res) => {
@@ -15,7 +15,7 @@ module.exports = (app) => {
   });
 
   // blog route loads blog.html
-  app.get('/blog', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/blog.html'));
+  app.get('/showreview', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/showreview.html'));
   });
 };

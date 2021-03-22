@@ -1,3 +1,4 @@
+const axios = require('axios');
 const express = require('express');
 
 // Sets up the Express App
@@ -21,6 +22,24 @@ require('./routes/html-routes.js')(app);
 // Syncing our sequelize models and then starting our Express app
 
 
-db.sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log(`Server listening on: http://localhost:${PORT}`));
-});
+
+db.sequelize.sync().then(
+  () => {
+    axios.get("https://www.omdbapi.com/?apikey=trilogy").then(
+      (Movies) => { 
+        Movies.forEach((movie) => {
+          db.Movies.create({
+            title: movie.title,
+            genre: movie.genre,
+            plot: movie.plot,
+            director: movie.director,
+            actors: movie.actors,
+            year: movie.year,
+            image: movie.image,
+          })
+        })
+        app.listen(PORT, () => console.log(`Server listening on: http://localhost:${PORT}`));
+      }            
+    )
+  }
+);

@@ -29,10 +29,9 @@ function renderButtons() {
 // Function to display movie info
 function displayMovieInfo() {
    
-    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
-    
+        
     $.ajax({
-        url: queryURL,
+        url: `/api/movies/${id}`,
         method: "GET"
     }).then(function (response) {
             $(".search-data").html("")
