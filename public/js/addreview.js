@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     }
   };
 
-  // Event listener for when the blog is submitted
+  // Event listener for when the showreview is submitted
   cmsForm.addEventListener("submit", handleFormSubmit);
 
   // Event handler for when a user submits a post
@@ -105,14 +105,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success in submitting post:", data);
-        window.location.href = "/blog";
+        window.location.href = "/showreview";
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
 
-  // Update a post and bring user to /blog
+  // Update a post and bring user to /showreview
   const updatePost = (post) => {
     fetch("/api/posts", {
       method: "PUT",
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     })
       .then(() => {
         console.log("Attempting update to post");
-        window.location.href = "/blog";
+        window.location.href = "/showreview";
       })
       .catch((error) => {
         console.error("Error:", error);

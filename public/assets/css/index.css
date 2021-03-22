@@ -13,7 +13,7 @@ h4 {
     font-family: 'Bubblegum Sans', cursive;
    margin-bottom: 10%;
 }
-img {
+.homepage {
     float: right;
     position: relative;
 }
@@ -34,6 +34,32 @@ img {
     border-width: 1px;
     border-color: #f7ae55;
   }
+
+  .btn {
+      margin: 10px 0 0 0;
+  }
+
+  .movie {
+      border: 3px solid rgb(138, 250, 229);
+        margin: 10px;
+  }
+
+  .container-movie {
+    margin-left: 20%;
+  }
+
+  .poster {
+      width: 25%;
+      height: 60%;
+      float: right;
+      position: relative;
+  }
+
+  h4 {
+      margin-left: 25%;
+      font-family: 'Bubblegum Sans', cursive;
+  }
+
 @media only screen and (max-width: 480px) {
 }
 @media screen and (max-width: 768px) {
