@@ -1,31 +1,31 @@
 // Wait for the DOM to completely load before we run our JS
-document.addEventListener('DOMContentLoaded', (e) => {
+document.addEventListener("DOMContentLoaded", (e) => {
   if (e) {
-    console.log('DOM loaded! 🚀');
+    console.log("DOM loaded! 🚀");
   }
 
-  const blogContainer = document.querySelector('.blog-container');
-  const postSourceSelect = document.getElementById('source');
+  const blogContainer = document.querySelector(".blog-container");
+  const postSourceSelect = document.getElementById("source");
 
   let posts;
 
   // Function to grab posts from the database
   const getPosts = (source) => {
-    let sourceString = source || '';
+    let sourceString = source || "";
     if (sourceString) {
-      sourceString = sourceString.replace(' ', '');
+      sourceString = sourceString.replace(" ", "");
       sourceString = `source/${sourceString}`;
     }
 
     fetch(`/api/posts/${sourceString}`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Success in getting posts:', data);
+        console.log("Success in getting posts:", data);
         posts = data;
 
         if (!posts.length) {
@@ -34,15 +34,15 @@ document.addEventListener('DOMContentLoaded', (e) => {
           initializeRows();
         }
       })
-      .catch((error) => console.error('Error:', error));
+      .catch((error) => console.error("Error:", error));
   };
 
   // Function to make DELETE request for a post
   const deletePost = (id) => {
     fetch(`/api/posts/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     }).then(() => getPosts(postSourceSelect.value));
   };
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
   // Function to help construct the post HTML content inside blogContainer
   const initializeRows = () => {
-    blogContainer.innerHTML = '';
+    blogContainer.innerHTML = "";
     const postsToAdd = [];
 
     posts.forEach((post) => postsToAdd.push(createNewRow(post)));
@@ -61,44 +61,44 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
   const createNewRow = (post) => {
     // Postcard div
-    const newPostCard = document.createElement('div');
-    newPostCard.classList.add('card');
+    const newPostCard = document.createElement("div");
+    newPostCard.classList.add("card");
 
     // Heading
-    const newPostCardHeading = document.createElement('div');
-    newPostCardHeading.classList.add('card-header');
+    const newPostCardHeading = document.createElement("div");
+    newPostCardHeading.classList.add("card-header");
 
     // Delete button
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'x';
-    deleteBtn.classList.add('delete', 'btn', 'btn-danger');
-    deleteBtn.addEventListener('click', handlePostDelete);
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "x";
+    deleteBtn.classList.add("delete", "btn", "btn-danger");
+    deleteBtn.addEventListener("click", handlePostDelete);
 
     // Edit button
-    const editBtn = document.createElement('button');
-    editBtn.textContent = 'EDIT';
-    editBtn.classList.add('delete', 'btn', 'btn-danger');
-    editBtn.addEventListener('click', handlePostEdit);
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "EDIT";
+    editBtn.classList.add("delete", "btn", "btn-danger");
+    editBtn.addEventListener("click", handlePostEdit);
 
     // New post info
-    const newPostTitle = document.createElement('h2');
-    const newPostDate = document.createElement('small');
-    const newPostRating = document.createElement('h5');
-    const newPostAuthor = document.createElement('p');
+    const newPostTitle = document.createElement("h2");
+    const newPostDate = document.createElement("small");
+    const newPostRating = document.createElement("h5");
+    const newPostAuthor = document.createElement("p");
 
     // New post source
-    const newPostSource = document.createElement('h5');
+    const newPostSource = document.createElement("h5");
     newPostSource.textContent = post.source;
-    newPostSource.style.float = 'right';
-    newPostSource.style.fontWeight = '700';
-    newPostSource.style.marginTop = '-15px';
+    newPostSource.style.float = "right";
+    newPostSource.style.fontWeight = "700";
+    newPostSource.style.marginTop = "-15px";
 
     // New post card body
-    const newPostCardBody = document.createElement('div');
-    newPostCardBody.classList.add('card-body');
+    const newPostCardBody = document.createElement("div");
+    newPostCardBody.classList.add("card-body");
 
     // New Post
-    const newPostBody = document.createElement('p');
+    const newPostBody = document.createElement("p");
     newPostTitle.textContent = post.title;
     newPostBody.textContent = post.review;
     newPostRating.textContent = post.rating;
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     newPostCardBody.appendChild(newPostAuthor);
     newPostCard.appendChild(newPostCardHeading);
     newPostCard.appendChild(newPostCardBody);
-    newPostCard.setAttribute('data-post', JSON.stringify(post));
+    newPostCard.setAttribute("data-post", JSON.stringify(post));
 
     return newPostCard;
   };
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     const currentPost = JSON.parse(
       e.target.parentElement.parentElement.dataset.post
     );
-    console.log('handlePostDelete -> currentPost', currentPost);
+    console.log("handlePostDelete -> currentPost", currentPost);
     deletePost(currentPost.id);
   };
 
@@ -135,23 +135,23 @@ document.addEventListener('DOMContentLoaded', (e) => {
     const currentPost = JSON.parse(
       e.target.parentElement.parentElement.dataset.post
     );
-    console.log('handlePostDelete -> currentPost', currentPost);
+    console.log("handlePostDelete -> currentPost", currentPost);
     window.location.href = `/cms?post_id=${currentPost.id}`;
   };
 
   const displayEmpty = () => {
-    blogContainer.innerHTML = '';
-    const messageH2 = document.createElement('h4');
-    messageH2.style.textAlign = 'center';
-    messageH2.style.marginTop = '50px';
+    blogContainer.innerHTML = "";
+    const messageH2 = document.createElement("h4");
+    messageH2.style.textAlign = "center";
+    messageH2.style.marginTop = "50px";
     messageH2.innerHTML = `No posts yet for this source. <br>Click <a href="/cms">here</a> to make a new post.`;
     blogContainer.appendChild(messageH2);
   };
 
   const handleSourceChange = (e) => {
     const newPostSource = e.target.value;
-    console.log('handleSourceChange -> newPostSource', newPostSource);
+    console.log("handleSourceChange -> newPostSource", newPostSource);
     getPosts(newPostSource.toLowerCase());
   };
-  postSourceSelect.addEventListener('change', handleSourceChange);
+  postSourceSelect.addEventListener("change", handleSourceChange);
 });

@@ -1,15 +1,18 @@
 // Wait for the DOM to completely load before we run our JS
-document.addEventListener('DOMContentLoaded', (e) => {
-    console.log('DOM loaded! 🚀')
+document.addEventListener("DOMContentLoaded", (e) => {
+  console.log("DOM loaded! 🚀");
 
-
+  // Check for query string and set flag, "updating", to false initially
+  const url = window.location.search;
+  let postId;
+  let updating = false;
 
   // Get a specific post
   const getPostData = (id) => {
     fetch(`/api/posts/${id}`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     })
       .then((response) => response.json())
@@ -28,40 +31,45 @@ document.addEventListener('DOMContentLoaded', (e) => {
         }
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
 
   // Extract the post ID from the URL
-  if (url.indexOf('?post_id=') !== -1) {
-    postId = url.split('=')[1];
+  if (url.indexOf("?post_id=") !== -1) {
+    postId = url.split("=")[1];
     getPostData(postId);
   }
 
   // Get elements from the page
-  const reviewInput = document.getElementById('review');
-  const titleInput = document.getElementById('title');
-  const ratingInput = document.getElementById('rating');
-  const authorInput = document.getElementById('author');
-  const cmsForm = document.getElementById('cms');
-  const postSourceSelect = document.getElementById('source');
+  const reviewInput = document.getElementById("review");
+  const titleInput = document.getElementById("title");
+  const ratingInput = document.getElementById("rating");
+  const authorInput = document.getElementById("author");
+  const cmsForm = document.getElementById("cms");
+  const postSourceSelect = document.getElementById("source");
 
   // Set default value for the source
-  postSourceSelect.value = 'Streaming';
+  postSourceSelect.value = "Streaming";
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (!titleInput.value || !reviewInput.value || !authorInput.value || !ratingInput.value) {
-      alert('Your post is missing some content');
+    if (
+      !titleInput.value ||
+      !reviewInput.value ||
+      !authorInput.value ||
+      !ratingInput.value
+    ) {
+      alert("Your post is missing some content");
     }
 
-  // Set alerts where rating values are outside the fixed range
-    
+    // Set alerts where rating values are outside the fixed range
+
     if (ratingInput.value > 5) {
-      alert('Your rating has to be between 1 and 5');
+      alert("Your rating has to be between 1 and 5");
     }
     if (ratingInput.value < 1) {
-      alert('Your rating has to be between 1 and 5');
+      alert("Your rating has to be between 1 and 5");
     }
     // Create a newPost object to send off to the backend
     const newPost = {
@@ -71,7 +79,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
       author: authorInput.value.trim(),
       source: postSourceSelect.value,
     };
-    console.log('handleFormSubmit -> newPost', newPost);
+    console.log("handleFormSubmit -> newPost", newPost);
 
     // Check if the user is updating or creating and preform said function
     if (updating) {
@@ -83,42 +91,42 @@ document.addEventListener('DOMContentLoaded', (e) => {
   };
 
   // Event listener for when the blog is submitted
-  cmsForm.addEventListener('submit', handleFormSubmit);
+  cmsForm.addEventListener("submit", handleFormSubmit);
 
   // Event handler for when a user submits a post
   const submitPost = (post) => {
-    fetch('/api/posts', {
-      method: 'POST',
+    fetch("/api/posts", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(post),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Success in submitting post:', data);
-        window.location.href = '/blog';
+        console.log("Success in submitting post:", data);
+        window.location.href = "/blog";
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
 
   // Update a post and bring user to /blog
   const updatePost = (post) => {
-    fetch('/api/posts', {
-      method: 'PUT',
+    fetch("/api/posts", {
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(post),
     })
       .then(() => {
-        console.log('Attempting update to post');
-        window.location.href = '/blog';
+        console.log("Attempting update to post");
+        window.location.href = "/blog";
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
 });

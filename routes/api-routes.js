@@ -5,23 +5,23 @@ const db = require('../models');
 // =============================================================
 module.exports = (app) => {
   // GET route for getting all of the posts
-  app.get('/api/movies/', (req, res) => {
+  app.get('/api/posts/', (req, res) => {
     db.Post.findAll({}).then((dbPost) => res.json(dbPost));
   });
 
-  // Get route for returning posts of a specific category
-  app.get('/api/movies/title/:title', (req, res) => {
-    db.Post.findAll({ // GET * FROM posts WHERE category = req.params.category
+  // Get route for returning posts of a specific source
+  app.get('/api/posts/source/:source', (req, res) => {
+    db.Post.findAll({ // GET * FROM posts WHERE source = req.params.source
       where: {
-        category: req.params.category,
+        source: req.params.source,
       },
     }).then((dbPost) => {
       res.json(dbPost);
     });
   });
 
-  // Get route for retrieving a single post
-  app.get('/api/movies/:id', (req, res) => {
+  // Get route for retrieving a single review
+  app.get('/api/posts/:id', (req, res) => {
     db.Post.findOne({
       where: {
         id: req.params.id,
@@ -41,8 +41,8 @@ module.exports = (app) => {
     }).then((dbPost) => res.json(dbPost));
   });
 
-  // DELETE route for deleting posts
-  app.delete('/api/movies/:id', (req, res) => {
+  // DELETE route for deleting reviews
+  app.delete('/api/posts/:id', (req, res) => {
     db.Post.destroy({
       where: {
         id: req.params.id,
@@ -51,7 +51,7 @@ module.exports = (app) => {
   });
 
     // PUT route for updating posts
-  app.put('/api/movies', (req, res) => {
+  app.put('/api/posts', (req, res) => {
     db.Post.update(req.body, {
       where: {
         id: req.body.id,

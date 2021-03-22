@@ -71,8 +71,21 @@ function displayMovieInfo() {
             
             renderButtons()
             saveMovies()
+        }).then((response) => {
+          if (response.length = 0)
+          fetch('/api/movies', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(review),
+          })
         })
-};
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    };
+
 
 
 //On click event listener for search button
