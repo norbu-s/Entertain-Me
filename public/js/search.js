@@ -39,6 +39,10 @@ function displayMovieInfo() {
             var movieDiv = $("<div class='movie'>")
             movieDiv.html("<h4>You Want to Review</h4><br>")
             searchText.prepend(movieDiv)
+
+            var imgURL = response.Poster;
+            var image = $("<img class='poster'>").attr("src", imgURL);
+            movieDiv.append(image);
           
             var title = response.Title;
             var pOne = $("<h2>").text(title);
@@ -58,10 +62,6 @@ function displayMovieInfo() {
             var year = response.Year;
             var pSix = $("<p>").text("Year: " + year);
             movieDiv.append(pFive);
-            var imgURL = response.Poster;
-            var image = $("<img>").attr("src", imgURL);
-            movieDiv.append(image);
-            
       
           
             if (moviesHistory.includes(response.Title) === false) {
