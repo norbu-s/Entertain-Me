@@ -30,10 +30,14 @@ function renderButtons() {
 function displayMovieInfo() {
    
         
+    var queryURL = "https://www.omdbapi.com/?t=" + movies + "&apikey=trilogy";
+
     $.ajax({
-        url: `/api/movies/${id}`,
+        url: queryURL,
         method: "GET"
-    }).then(function (response) {
+    })
+    
+    .then(function (response) {
             $(".search-data").html("")
 
             var movieDiv = $("<div class='movie'>")
@@ -80,10 +84,24 @@ function displayMovieInfo() {
             body: JSON.stringify(review),
           })
         })
+        .then(
+            (Movies) => { 
+              console.log(Movies.data);
+              Movies.forEach((movie) => {
+                db.Movies.create({
+                  title: movie.title,
+                  genre: movie.genre,
+                  plot: movie.plot,
+                  director: movie.director,
+                  actors: movie.actors,
+                  year: movie.year,
+                  image: movie.image,
+                })
+
         .catch((error) => {
           console.error('Error:', error);
         });
-    };
+    });
 
 
 
@@ -123,4 +141,5 @@ $(document).ready(function() {
 
     //render buttons
     renderButtons()
-  })
+  });
+})}

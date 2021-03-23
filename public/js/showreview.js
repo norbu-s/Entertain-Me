@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     console.log("DOM loaded! 🚀");
   }
 
-  const blogContainer = document.querySelector(".blog-container");
+  const showreviewContainer = document.querySelector(".showreview-container");
   const postSourceSelect = document.getElementById("source");
 
   let posts;
@@ -50,13 +50,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
   // Getting initial list of posts
   getPosts();
 
-  // Function to help construct the post HTML content inside blogContainer
+  // Function to help construct the post HTML content inside showreviewContainer
   const initializeRows = () => {
-    blogContainer.innerHTML = "";
+    showreviewContainer.innerHTML = "";
     const postsToAdd = [];
 
     posts.forEach((post) => postsToAdd.push(createNewRow(post)));
-    postsToAdd.forEach((post) => blogContainer.appendChild(post));
+    postsToAdd.forEach((post) => showreviewContainer.appendChild(post));
   };
 
   const createNewRow = (post) => {
@@ -136,16 +136,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
       e.target.parentElement.parentElement.dataset.post
     );
     console.log("handlePostDelete -> currentPost", currentPost);
-    window.location.href = `/cms?post_id=${currentPost.id}`;
+    window.location.href = `/addreview?post_id=${currentPost.id}`; // need to check later
   };
 
   const displayEmpty = () => {
-    blogContainer.innerHTML = "";
+    showreviewContainer.innerHTML = "";
     const messageH2 = document.createElement("h4");
     messageH2.style.textAlign = "center";
     messageH2.style.marginTop = "50px";
-    messageH2.innerHTML = `No posts yet for this source. <br>Click <a href="/cms">here</a> to make a new post.`;
-    blogContainer.appendChild(messageH2);
+    messageH2.innerHTML = `No posts yet for this source. <br>Click <a href="/addreview">here</a> to make a new post.`; // need to check later
+    showreviewContainer.appendChild(messageH2);
   };
 
   const handleSourceChange = (e) => {

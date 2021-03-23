@@ -10,11 +10,11 @@ module.exports = (app) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
   });
 
-  app.get('/cms', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/cms.html'));
+  app.get('/addreview', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/addreview.html'));
   });
 
-  // blog route loads blog.html
+  // showreview route loads showreview.html
   app.get('/showreview', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/showreview.html'));
   });
