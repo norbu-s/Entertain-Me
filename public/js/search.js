@@ -1,4 +1,3 @@
-
 var searchText = $(".search-data")
 var moviesHistory = []
 var movie

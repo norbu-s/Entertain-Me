@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const titleInput = document.getElementById("title");
   const ratingInput = document.getElementById("rating");
   const authorInput = document.getElementById("author");
-  const cmsForm = document.getElementById("cms");
+  const addreviewForm = document.getElementById("addreview");
   const postSourceSelect = document.getElementById("source");
 
   // Set default value for the source
@@ -90,8 +90,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
     }
   };
 
-  // Event listener for when the blog is submitted
-  cmsForm.addEventListener("submit", handleFormSubmit);
+  // Event listener for when the showreview is submitted
+  addreviewForm.addEventListener("submit", handleFormSubmit);
 
   // Event handler for when a user submits a post
   const submitPost = (post) => {
@@ -105,14 +105,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success in submitting post:", data);
-        window.location.href = "/blog";
+        window.location.href = "/showreview"; // may need to replace later
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
 
-  // Update a post and bring user to /blog
+  // Update a post and bring user to /showreview
   const updatePost = (post) => {
     fetch("/api/posts", {
       method: "PUT",
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     })
       .then(() => {
         console.log("Attempting update to post");
-        window.location.href = "/blog";
+        window.location.href = "/showreview"; // may need to replace later
       })
       .catch((error) => {
         console.error("Error:", error);
