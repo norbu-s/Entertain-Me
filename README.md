@@ -6,7 +6,13 @@ The benefit of the site is that it is an easy way for users to keep a log of mov
 
 
 <br> <b>See Deployed Application Link: </b>
-<a href=""> EntertainMe </a>
+<a href="https://dashboard.heroku.com/apps/arcane-badlands-48936"> EntertainMe </a>
+
+
+<br> <b>See Presentation Link Link: </b>
+<a href="https://docs.google.com/presentation/d/1vfz9NqPqehyGoCWExFX2s03LD2pxUsYRkPWb1QnSV3U/edit?usp=sharing"> Presentation </a>
+
+
 
 ## Table of contents
   - [Motivation](#motivation)
@@ -62,30 +68,32 @@ THEN I am able to click the EntertainMe logo to take me back to the homepage<br>
 
 ## Mockups
 <b>Mobile Homepage</b></br>
-![MobileHomepage]
+![mobileHompage](https://user-images.githubusercontent.com/74234842/112114305-05383d00-8c0c-11eb-9294-abe13af177da.png)
 
 <b>Desktop Review List</b></br>
-![MobileDashboard]
+![reviewlistDesktop](https://user-images.githubusercontent.com/74234842/112114468-36b10880-8c0c-11eb-87cf-7db92f70b560.png)
+
 
 <b>Desktop Search Results</b></br>
-![DesktopHomepage]
+![desktopHomepage](https://user-images.githubusercontent.com/74234842/112114404-239e3880-8c0c-11eb-90b7-7d7ec95ab49f.png)
+
 
 
 
 ## Built with
 - [Bootstrap](https://getbootstrap.com/)
 - [JQuery](https://jquery.com/)
-- [Moment.js](https://momentjs.com/)
 - [LucidChart](https://www.adobe.com/au/products/xd.html) (wireframes)
-- [IMDB](https://travelbriefing.org/api) to generate the seeds file for our database
-- [My SQL](https://ratesapi.io/) 
-- [Sequalise](https://restcountries.eu/) 
+- [OMDB](https://travelbriefing.org/api) Database to pull movies
+- [My SQL](https://www.mysql.com/) 
+- [Sequalise](https://sequelize.org/) 
+- [Axios](https://www.npmjs.com/package/axios) New Technology
+- [Heroku](https://www.heroku.com/) for deployment
 
 ## Features
 - Search for a movie in the database
-- View movie detials: Title, Actors, Genre & Year of release
-- Add a movie to your Review List
-- Delete a movie from your Review List
+- View movie detials: Title, Actors, Genre, Director & Year of release
+- Add a movie to your Movie List
 - Leave a comment Review and a rating (out of 5)
 - Save your review (saves into the database)
 - Delete your review
@@ -95,9 +103,10 @@ THEN I am able to click the EntertainMe logo to take me back to the homepage<br>
 
 ## Functionality 
 <b>See deployed link here:</b><br>
-<h3><a href=""> EntertainMe Site</a></h3>
+![demonstration](https://user-images.githubusercontent.com/74234842/112115364-35cca680-8c0d-11eb-96c9-e6f9722fbd5e.gif)
 
-![EntertainMe GIF]
+
+
 
 ## Credits
 The search icon, star icon and trash icon are from https://fontawesome.com/<br>
