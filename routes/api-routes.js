@@ -9,15 +9,6 @@ module.exports = (app) => {
     db.Post.findAll({}).then((dbPost) => res.json(dbPost));
   });
 
-// Get route for returning movies from movies
-  app.get('/api/movies/:id', (req, res) => {
-    db.Movies.findOne({
-      where: {
-        id: req.params.id,
-      },
-    }).then((dbMovies) => res.json(dbMovies));
-  });
-
   // Get route for returning posts of a specific source
   app.get('/api/posts/source/:source', (req, res) => {
     db.Post.findAll({ // GET * FROM posts WHERE source = req.params.source

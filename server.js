@@ -22,37 +22,6 @@ require('./routes/html-routes.js')(app);
 // Syncing our sequelize models and then starting our Express app
 
 
-
-
 db.sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Server listening on: http://localhost:${PORT}`));
 });
-
-// db.sequelize.sync().then(
-//   () => {
-//     const Movies = () => {
-//       try {
-//         return axios.get("https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy")
-//       } catch (error) {
-//         console.error(error)
-    
-    
-    // axios.get("https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy").then(
-//       (Movies) => { 
-//         console.log(Movies.data);
-//         Movies.forEach((movie) => {
-//           db.Movies.create({
-//             title: movie.title,
-//             genre: movie.genre,
-//             plot: movie.plot,
-//             director: movie.director,
-//             actors: movie.actors,
-//             year: movie.year,
-//             image: movie.image,
-//           })
-//         })
-//         app.listen(PORT, () => console.log(`Server listening on: http://localhost:${PORT}`));
-//       }            
-//     )
-//   }
-// );
