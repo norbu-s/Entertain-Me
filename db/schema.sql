@@ -3,6 +3,8 @@ DROP DATABASE IF EXISTS entertain;
 -- Creates the "entertain" database --
 CREATE DATABASE entertain;
 
+USE entertain;
+
 CREATE TABLE movies(
 id INT AUTO_INCREMENT NOT NULL,
 title VARCHAR(255) NOT NULL,
