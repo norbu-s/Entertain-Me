@@ -1,7 +1,7 @@
 
 var searchText = $(".search-data")
 var moviesHistory = []
-var movie
+
 
 
 // Function to set movies from MoviesHistory array into local storage
@@ -27,10 +27,10 @@ function renderButtons() {
 
 
 // Function to display movie info
-function displayMovieInfo() {
+function displayMovieInfo(movieTitle) {
    
         
-    var queryURL = "https://www.omdbapi.com/?t=" + movies + "&apikey=trilogy";
+    var queryURL = '/api/search/' + movieTitle; 
 
     $.ajax({
         url: queryURL,
@@ -74,48 +74,49 @@ function displayMovieInfo() {
             
             renderButtons()
             saveMovies()
-        }).then((response) => {
-          if (response.length = 0)
-          fetch('/api/movies', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(review),
-          })
         })
-        .then(
-            (Movies) => { 
-              console.log(Movies.data);
-              Movies.forEach((movie) => {
-                db.Movies.create({
-                  title: movie.title,
-                  genre: movie.genre,
-                  plot: movie.plot,
-                  director: movie.director,
-                  actors: movie.actors,
-                  year: movie.year,
-                  image: movie.image,
-                })
+        // .then((response) => {
+        //   if (response.length = 0)
+        //   fetch('/api/movies', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(review),
+        //   })
+        // })
+        // .then(
+        //     (Movies) => { 
+        //       console.log(Movies.data);
+        //       Movies.forEach((movie) => {
+        //         db.Movies.create({
+        //           title: movie.title,
+        //           genre: movie.genre,
+        //           plot: movie.plot,
+        //           director: movie.director,
+        //           actors: movie.actors,
+        //           year: movie.year,
+        //           image: movie.image,
+        //         })
 
         .catch((error) => {
           console.error('Error:', error);
         });
-    });
+    // });
 
 
 
 //On click event listener for search button
 $("#run-search").on("click", function () {
-    movie = $("#search-term").val()
-    displayMovieInfo()
+    const movie = $("#search-term").val()
+    displayMovieInfo(movie)
 
 })
 
 //On click event listener for movie buttons
 $(document).on("click", ".movie-btn", function () {
-    movie = $(this).attr("data-Title");
-    displayMovieInfo()
+    const movie = $(this).attr("data-Title");
+    displayMovieInfo() // should navigate to the reviews page with the selected movie
 
 })
 
@@ -142,4 +143,4 @@ $(document).ready(function() {
     //render buttons
     renderButtons()
   });
-})}
+// })}

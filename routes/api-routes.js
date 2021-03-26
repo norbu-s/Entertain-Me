@@ -1,9 +1,31 @@
 // Requiring our Todo model
 const db = require('../models');
+const axios = require('axios');
 
 // Routes
 // =============================================================
 module.exports = (app) => {
+  
+  // GET route for getting movie titles
+  app.get('/api/search/:title', (req, res) => {
+    db.Movies.findAll({}).then((movies) => {
+      if (movies.length === 0){
+       
+       axios.get("https://www.omdbapi.com/?t=" + req.params.title + "&apikey=trilogy").then(omdbData => {
+      // TODO: insert into movies database using sequelize here
+       res.json(omdbdata.data);
+       console.log(omdbdata.data);
+      }); 
+
+      }
+      else {
+        res.json(movies);
+
+      }
+    })
+  });
+  
+  
   // GET route for getting all of the posts
   app.get('/api/posts/', (req, res) => {
     db.Post.findAll({}).then((dbPost) => res.json(dbPost));
