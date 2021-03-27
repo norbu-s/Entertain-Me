@@ -20,7 +20,17 @@
     "url": "git+https://github.com/norbu-s/Entertain-Me.git"
   },
   "author": "Norbu",
-  "collaborators": [ {"name":"Suzie"}, {"name":"Khai"}, {"name":"Cel"} ],
+  "collaborators": [
+    {
+      "name": "Suzie"
+    },
+    {
+      "name": "Khai"
+    },
+    {
+      "name": "Cel"
+    }
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/norbu-s/Entertain-Me/issues"
