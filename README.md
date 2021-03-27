@@ -6,7 +6,7 @@ The benefit of the site is that it is an easy way for users to keep a log of mov
 
 
 <br> <b>See Deployed Application Link: </b>
-<a href="https://dashboard.heroku.com/apps/arcane-badlands-48936"> EntertainMe </a>
+<a href="https://arcane-badlands-48936.herokuapp.com/"> EntertainMe </a>
 
 
 <br> <b>See Presentation Link Link: </b>
@@ -102,7 +102,7 @@ THEN I am able to click the EntertainMe logo to take me back to the homepage<br>
 
 
 ## Functionality 
-<b>See deployed link here:</b><br>
+<b>See deployed link here:</b><br> https://arcane-badlands-48936.herokuapp.com/
 ![demonstration](https://user-images.githubusercontent.com/74234842/112115364-35cca680-8c0d-11eb-96c9-e6f9722fbd5e.gif)
 
 
