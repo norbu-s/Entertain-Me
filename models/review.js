@@ -1,11 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
-    const reviews = sequelize.define("reviews", {
-        title: {
-            type: DataTypes.STRING,
+    const Review = sequelize.define('Review', {
+
+        id: {
+            type: DataTypes.INTEGER,
             allowNull: false,
-            validate: {
-                len: [1],
-            },
+        },
+
+        movieId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
         },
         review: {
             type: DataTypes.TEXT,
@@ -32,9 +35,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         source: {
             type: DataTypes.STRING,
-            defaultValue: "Streaming",
-        },
+            defaultValue: 'Streaming',
+        }
     });
 
-    return reviews;
+    return Review;
 };
