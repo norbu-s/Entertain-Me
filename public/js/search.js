@@ -1,6 +1,6 @@
 const searchText = $(".search-data")
 let moviesHistory = []  //referenced in line 107
-let movie //referenced in line 92 and 99
+
 
 
 // Function to set movies from MoviesHistory array into local storage
@@ -26,14 +26,17 @@ function renderButtons() {
 
 
 // Function to display movie info
-function displayMovieInfo() {
-   
-    const queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
-    
+function displayMovieInfo(movieTitle) {
+        
+   const queryURL = '/api/search/' + movieTitle; 
+
+
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function (response) {
+    })
+    
+    .then(function (response) {
             $(".search-data").html("")
 
             const movieDiv = $("<div class='movie'>")
@@ -70,34 +73,22 @@ function displayMovieInfo() {
             
             renderButtons()
             saveMovies()
-        }).then((response) => {
-          if (response.length = 0)
-          fetch('/api/movies', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(review),
-          })
         })
         .catch((error) => {
           console.error('Error:', error);
         });
-    };
-
-
 
 //On click event listener for search button
 $("#run-search").on("click", function () {
-    movie = $("#search-term").val()
-    displayMovieInfo()
+    const movie = $("#search-term").val()
+    displayMovieInfo(movie)
 
 })
 
 //On click event listener for movie buttons
 $(document).on("click", ".movie-btn", function () {
-    movie = $(this).attr("data-Title");
-    displayMovieInfo()
+    const movie = $(this).attr("data-Title");
+    displayMovieInfo() // TODO: should navigate to the reviews page with the selected movie
 
 })
 
@@ -123,4 +114,6 @@ $(document).ready(function() {
 
     //render buttons
     renderButtons()
-  })
+  
+});
+}
