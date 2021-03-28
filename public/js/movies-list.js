@@ -1,5 +1,5 @@
-const moviesHistory = []
-const movie
+const moviesHistory = [];
+// const movie
 
 // Function to render buttons based on what is in moviesHistory array
 function renderButtons() {
@@ -14,6 +14,8 @@ function renderButtons() {
 }
 
 // Function to display movie info
+
+//On click event listener for movie buttons
 
 function displayMovieTitle() {
 
@@ -31,28 +33,22 @@ function displayMovieTitle() {
     renderTitle();
 };
 
-//On click event listener for movie buttons
+// On click event listener for movie buttons
 $(document).on("click", ".movie-btn", function() {
-    movie = $(this).attr("data-Title");
+    const movie = $(this).attr("data-Title");
     displayMovieTitle()
 
 })
 
 
 //To run when document loads (if/else statement that will pull from local storage only if the value is not "null")
-$(document).ready(function() { <<
-            << << < HEAD
-            if (localStorage.getItem("movies") !== null) {
-                var savedMovie = localStorage.getItem("movies");
-                var pushMovies = JSON.parse(savedMovie) ===
-                    === =
-                    if (localStorage.getItem("movies") !== null) {
-                        const savedMovie = localStorage.getItem("movies");
-                        const pushMovies = JSON.parse(savedMovie) >>>
-                            >>> > af18ad6ab5253a6d6f5280828a707c0c7f6da7d3
-                        moviesHistory = moviesHistory.concat(pushMovies)
-                    }
+$(document).ready(function() {
+    if (localStorage.getItem("movies") != null) {
+        const savedMovie = localStorage.getItem("movies");
+        const pushMovies = JSON.parse(savedMovie)
+        moviesHistory = moviesHistory.concat(pushMovies)
+    }
 
-                    //render buttons
-                renderButtons()
-            })
+    //render buttons
+    renderButtons()
+})

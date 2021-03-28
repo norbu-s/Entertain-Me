@@ -5,6 +5,7 @@
                     id: {
                         type: DataTypes.INTEGER,
                         allowNull: false,
+                        primaryKey: true,
                     },
 
                     title: {
@@ -43,5 +44,5 @@
                 }
             );
 
-            return movies;
+            return Movies;
         };
