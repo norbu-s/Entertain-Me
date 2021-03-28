@@ -1,9 +1,6 @@
 var moviesHistory = []
 var movie
 
-
-
-
 // Function to render buttons based on what is in moviesHistory array
 function renderButtons() {
     $(".buttons-view").empty();
@@ -18,28 +15,26 @@ function renderButtons() {
 
 // Function to display movie info
 
-function displayMovieInfo() {
+function displayMovieTitle() {
 
-    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
-
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function(response) {
-        var movieDiv = $("<div class='movie'>");
-        if (moviesHistory.includes(response.Title) === false) {
-            moviesHistory.push(response.Title)
-        }
-
-        renderButtons()
-    })
+    const renderTitle = (body, movies) => {
+        const section = document.createElement('section');
+        const domString = `
+          <p>
+            <strong>Post: </strong>${movies.Title}
+          </p>
+        `;
+        section.innerHTML = domString;
+        body.appendChild(section);
+    };
+    renderButtons();
+    renderTitle();
 };
-
 
 //On click event listener for movie buttons
 $(document).on("click", ".movie-btn", function() {
     movie = $(this).attr("data-Title");
-    displayMovieInfo()
+    displayMovieTitle()
 
 })
 
