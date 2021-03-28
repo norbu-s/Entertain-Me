@@ -1,6 +1,5 @@
-
-var searchText = $(".search-data")
-var moviesHistory = []
+const searchText = $(".search-data")
+let moviesHistory = []  //referenced in line 107
 
 
 
@@ -14,8 +13,8 @@ function saveMovies() {
 // Function to render buttons based on what is in moviesHistory array
 function renderButtons() {
     $(".buttons-view").empty();
-    for (var i = 0; i < moviesHistory.length; i++) {
-        var a = $("<button>");
+    for (let i = 0; i < moviesHistory.length; i++) {
+        const a = $("<button>");
         a.addClass("btn btn-danger movie-btn");
         a.attr("data-Title", moviesHistory[i]);
         a.text(moviesHistory[i]);
@@ -28,9 +27,9 @@ function renderButtons() {
 
 // Function to display movie info
 function displayMovieInfo(movieTitle) {
-   
         
-    var queryURL = '/api/search/' + movieTitle; 
+   const queryURL = '/api/search/' + movieTitle; 
+
 
     $.ajax({
         url: queryURL,
@@ -40,31 +39,31 @@ function displayMovieInfo(movieTitle) {
     .then(function (response) {
             $(".search-data").html("")
 
-            var movieDiv = $("<div class='movie'>")
+            const movieDiv = $("<div class='movie'>")
             movieDiv.html("<h4>You Want to Review</h4><br>")
             searchText.prepend(movieDiv)
 
-            var imgURL = response.Poster;
-            var image = $("<img class='poster'>").attr("src", imgURL);
+            const imgURL = response.Poster;
+            const image = $("<img class='poster'>").attr("src", imgURL);
             movieDiv.append(image);
           
-            var title = response.Title;
-            var pOne = $("<h2>").text(title);
+            const title = response.Title;
+            const pOne = $("<h2>").text(title);
 
-            var genre = response.Genre;
-            var pTwo = $("<p>").text("Genre: " + genre);
+            const genre = response.Genre;
+            const pTwo = $("<p>").text("Genre: " + genre);
             movieDiv.append(pOne);
-            var plot = response.Plot;
-            var pThree = $("<p>").text("Plot: " + plot);
+            const plot = response.Plot;
+            const pThree = $("<p>").text("Plot: " + plot);
             movieDiv.append(pTwo);
-            var director = response.Director;
-            var pFour = $("<p>").text("Director: " + director);
+            const director = response.Director;
+            const pFour = $("<p>").text("Director: " + director);
             movieDiv.append(pThree);
-            var actors = response.Actors;
-            var pFive = $("<p>").text("Actors: " + actors);
+            const actors = response.Actors;
+            const pFive = $("<p>").text("Actors: " + actors);
             movieDiv.append(pFour);
-            var year = response.Year;
-            var pSix = $("<p>").text("Year: " + year);
+            const year = response.Year;
+            const pSix = $("<p>").text("Year: " + year);
             movieDiv.append(pFive);
       
           
@@ -108,8 +107,8 @@ location.reload()
 //To run when document loads (if/else statement that will pull from local storage only if the value is not "null")
 $(document).ready(function() {
     if(localStorage.getItem("movies") !== null) {
-        var savedMovie = localStorage.getItem("movies");
-        var pushMovies = JSON.parse(savedMovie)
+        const savedMovie = localStorage.getItem("movies");
+        const pushMovies = JSON.parse(savedMovie)
         moviesHistory = moviesHistory.concat(pushMovies)
     }
 
