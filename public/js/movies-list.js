@@ -14,26 +14,6 @@ function renderButtons() {
 }
 
 // Function to display movie info
-<<<<<<< HEAD
-=======
-function displayMovieTitle() {
-   
-    const queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
-    
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function(response) {
-        const movieDiv = $("<div class='movie'>");
-            if (moviesHistory.includes(response.Title) === false) {
-                moviesHistory.push(response.Title)
-            }
-            
-            renderButtons()
-
-        })
-};
->>>>>>> af18ad6ab5253a6d6f5280828a707c0c7f6da7d3
 
 function displayMovieTitle() {
 
@@ -60,19 +40,19 @@ $(document).on("click", ".movie-btn", function() {
 
 
 //To run when document loads (if/else statement that will pull from local storage only if the value is not "null")
-$(document).ready(function() {
-<<<<<<< HEAD
-    if (localStorage.getItem("movies") !== null) {
-        var savedMovie = localStorage.getItem("movies");
-        var pushMovies = JSON.parse(savedMovie)
-=======
-    if(localStorage.getItem("movies") !== null) {
-        const savedMovie = localStorage.getItem("movies");
-        const pushMovies = JSON.parse(savedMovie)
->>>>>>> af18ad6ab5253a6d6f5280828a707c0c7f6da7d3
-        moviesHistory = moviesHistory.concat(pushMovies)
-    }
+$(document).ready(function() { <<
+            << << < HEAD
+            if (localStorage.getItem("movies") !== null) {
+                var savedMovie = localStorage.getItem("movies");
+                var pushMovies = JSON.parse(savedMovie) ===
+                    === =
+                    if (localStorage.getItem("movies") !== null) {
+                        const savedMovie = localStorage.getItem("movies");
+                        const pushMovies = JSON.parse(savedMovie) >>>
+                            >>> > af18ad6ab5253a6d6f5280828a707c0c7f6da7d3
+                        moviesHistory = moviesHistory.concat(pushMovies)
+                    }
 
-    //render buttons
-    renderButtons()
-})
+                    //render buttons
+                renderButtons()
+            })
