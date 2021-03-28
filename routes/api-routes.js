@@ -31,28 +31,28 @@ module.exports = (app) => {
     });
 
 
-    // GET route for getting all of the posts
-    app.get('/api/posts/', (req, res) => {
-        db.Post.findAll({}).then((dbPost) => res.json(dbPost));
+    // GET route for getting all of the reviews
+    app.get('/api/reviews/', (req, res) => {
+        db.Reviews.findAll({}).then((dbReviews) => res.json(dbReviews));
     });
 
-    // Get route for returning posts of a specific source
-    app.get('/api/posts/source/:source', (req, res) => {
-        db.Post.findAll({ // GET * FROM posts WHERE source = req.params.source
+    // Get route for returning reviews of a specific source
+    app.get('/api/reviews/source/:source', (req, res) => {
+        db.Reviews.findAll({ // GET * FROM reviews WHERE source = req.params.source
             where: {
                 source: req.params.source,
             },
-        }).then((dbPost) => {
-            res.json(dbPost);
+        }).then((dbReviews) => {
+            res.json(dbReviews);
         });
 
-        // PUT route for updating posts
+        // PUT route for updating reviews
         app.put("/api/reviews", (req, res) => {
-            db.Post.update(req.body, {
+            db.Reviews.update(req.body, {
                 where: {
                     id: req.body.id,
                 },
-            }).then((dbPost) => res.json(dbPost));
+            }).then((dbReviews) => res.json(dbReviews));
         });
 
         app.get("/api/movies/:id", (req, res) => {
