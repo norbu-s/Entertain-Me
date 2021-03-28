@@ -1,6 +1,6 @@
 const searchText = $(".search-data")
-const moviesHistory = []
-const movie
+let moviesHistory = []  //referenced in line 107
+let movie //referenced in line 92 and 99
 
 
 // Function to set movies from MoviesHistory array into local storage
