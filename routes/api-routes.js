@@ -1,4 +1,4 @@
-// Requiring our Todo model
+// Requiring our dats model
 const db = require('../models');
 const axios = require('axios');
 
@@ -11,16 +11,22 @@ module.exports = (app) => {
     db.Movies.findAll({}).then((movies) => {
       if (movies.length === 0){
        
-       axios.get("https://www.omdbapi.com/?t=" + req.params.title + "&apikey=trilogy").then(omdbData => {
+       axios.get("https://www.omdbapi.com/?t=" + req.params.title + "&apikey=trilogy").then(omdbdata => {
       // TODO: insert into movies database using sequelize here
-       res.json(omdbdata.data);
+      db.Movies.create({
+        title: movie.title,
+        genre: movie.genre,
+        plot: movie.plot,
+        director: movie.director,
+        actors: movie.actors,
+        year: movie.year,
+        image: movie.image,
+      }).then((omdbdata) => res.json(omdbdata.data));
        console.log(omdbdata.data);
       }); 
-
       }
       else {
         res.json(movies);
-
       }
     })
   });
@@ -29,15 +35,6 @@ module.exports = (app) => {
   // GET route for getting all of the posts
   app.get('/api/posts/', (req, res) => {
     db.Post.findAll({}).then((dbPost) => res.json(dbPost));
-  });
-
-// Get route for returning movies from movies
-  app.get('/api/movies/:id', (req, res) => {
-    db.Movies.findOne({
-      where: {
-        id: req.params.id,
-      },
-    }).then((dbMovies) => res.json(dbMovies));
   });
 
   // Get route for returning posts of a specific source

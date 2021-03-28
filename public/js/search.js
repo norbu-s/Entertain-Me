@@ -75,36 +75,9 @@ function displayMovieInfo(movieTitle) {
             renderButtons()
             saveMovies()
         })
-        // .then((response) => {
-        //   if (response.length = 0)
-        //   fetch('/api/movies', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(review),
-        //   })
-        // })
-        // .then(
-        //     (Movies) => { 
-        //       console.log(Movies.data);
-        //       Movies.forEach((movie) => {
-        //         db.Movies.create({
-        //           title: movie.title,
-        //           genre: movie.genre,
-        //           plot: movie.plot,
-        //           director: movie.director,
-        //           actors: movie.actors,
-        //           year: movie.year,
-        //           image: movie.image,
-        //         })
-
         .catch((error) => {
           console.error('Error:', error);
         });
-    // });
-
-
 
 //On click event listener for search button
 $("#run-search").on("click", function () {
@@ -116,7 +89,7 @@ $("#run-search").on("click", function () {
 //On click event listener for movie buttons
 $(document).on("click", ".movie-btn", function () {
     const movie = $(this).attr("data-Title");
-    displayMovieInfo() // should navigate to the reviews page with the selected movie
+    displayMovieInfo() // TODO: should navigate to the reviews page with the selected movie
 
 })
 
@@ -142,5 +115,6 @@ $(document).ready(function() {
 
     //render buttons
     renderButtons()
-  });
-// })}
+  
+});
+}
