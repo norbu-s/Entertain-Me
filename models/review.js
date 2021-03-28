@@ -1,12 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
-  const Post = sequelize.define('Post', {
-    title: {
-      type: DataTypes.STRING,
+  const Review = sequelize.define('Review', {
+    
+    id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      validate: {
-        len: [1],
       },
-    },
+    
+    movieId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      },
     review: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -36,5 +39,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  return Post;
+  return Review;
 };
