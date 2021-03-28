@@ -21,7 +21,7 @@ function displayMovieTitle() {
         const section = document.createElement('section');
         const domString = `
           <p>
-            <strong>Post: </strong>${movies.Title}
+            <strong>Post: </strong>${movies.title}
           </p>
         `;
         section.innerHTML = domString;
