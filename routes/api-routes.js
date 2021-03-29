@@ -30,7 +30,6 @@ module.exports = (app) => {
         })
     });
 
-
     // GET route for getting all of the reviews
     app.get('/api/reviews/', (req, res) => {
         db.Reviews.findAll({}).then((dbReviews) => res.json(dbReviews));
@@ -55,12 +54,16 @@ module.exports = (app) => {
             }).then((dbReviews) => res.json(dbReviews));
         });
 
-        app.get("/api/movies/:id", (req, res) => {
+
+        // Get route for returning a specific movies title
+        app.get("/api/search/:title", (req, res) => {
             db.Movies.findOne({
                 where: {
-                    id: req.params.id,
+                    title: req.params.title,
                 },
             }).then((dbMovies) => res.json(dbMovies));
         });
+
+        app.get("/api/search/:title")
     });
 }
