@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
 
 .navbar-nav > li{
   padding-left:30px;
@@ -49,20 +48,16 @@
 img {
   float: right;
   position: relative;
-  padding-right: 5%;
 }
 
 .header {
   background-color: white;
-  /* margin: 15% 0 5% 25%; */
+  background-repeat: no-repeat;
+  margin: 5% 0 5% 25%;
   text-align: center;
   font-family: 'Rock Salt', cursive;
 }
 
-h1 {
-  padding-top: 10%;
-  margin-bottom: 10%;
-}
 /* BODY */
 
 #addreview {
@@ -80,14 +75,6 @@ h1 {
   align-items: center;
   flex-direction: row;
   margin: 5%;
-}
-
-.display-8 {
-  font-family: 'Bubblegum Sans', cursive;
-}
-
-.btn-info {
-  width: auto;
 }
 
 @media only screen and (max-width: 480px) {
