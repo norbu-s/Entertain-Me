@@ -5,7 +5,7 @@ const db = require('../models');
 // =============================================================
 module.exports = (app) => {
   // GET route for getting all of the posts
-  app.get('/api/posts/', (req, res) => {
+  app.get('/api/reviews/', (req, res) => {
     db.Post.findAll({}).then((dbPost) => res.json(dbPost));
   });
 
