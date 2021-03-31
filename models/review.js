@@ -1,12 +1,20 @@
 module.exports = (sequelize, DataTypes) => {
   const Review = sequelize.define('Review', {
-      title: {
+
+
+    // I'm skipping this part 
+    
+    movieId: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1],
       },
+      primaryKey: true,
+
     },
+    
+  
     review: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -32,9 +40,34 @@ module.exports = (sequelize, DataTypes) => {
     },
     source: {
       type: DataTypes.STRING,
-      defaultValue: 'Streaming',
-    }
-  });
+      defaultValue: 'Streaming'
+
+  }
+},
+
+//now add timestamps
+
+{timestamps: false});
+
 
   return Review;
 };
+
+
+  
+    // id: {
+    //   type: DataTypes.DECIMAL,
+    //   allowNull: false,
+    //   validate: {
+    //     len: [1],
+    //   },
+
+    // },
+
+      // title: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    //   validate: {
+    //     len: [1],
+    //   },
+    // },
