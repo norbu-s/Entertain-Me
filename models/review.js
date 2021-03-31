@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const Post = sequelize.define('Post', {
-    title: {
+  const Review = sequelize.define('Review', {
+      title: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -36,5 +36,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  return Post;
+  return Review;
 };
