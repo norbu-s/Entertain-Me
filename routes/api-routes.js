@@ -53,11 +53,11 @@ module.exports = (app) => {
   });
 
     // PUT route for updating posts
-  app.put('/api/posts', (req, res) => {
-    db.Post.update(req.body, {
+  app.put('/api/reviews', (req, res) => {
+    db.Review.update(req.body, {
       where: {
         id: req.body.id,
       },
-    }).then((dbPost) => res.json(dbPost));
+    }).then((dbReview) => res.json(dbReview));
   });
 };
