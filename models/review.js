@@ -2,15 +2,15 @@ module.exports = (sequelize, DataTypes) => {
   const Review = sequelize.define('Review', {
 
 
-    // I'm skipping this part 
+   
     
-    movieId: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1],
       },
-      primaryKey: true,
+      
 
     },
     
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
   }
 },
 
-//now add timestamps
+
 
 {timestamps: false});
 

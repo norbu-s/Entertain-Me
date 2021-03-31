@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
           console.log(`Success in grabbing review ${id}`, data);
 
           // Populate the form with the existing post
-          movieIdInput.value = data.movieId;
+          titleInput.value = data.title;
           reviewInput.value = data.review;
           ratingInput.value = data.rating;
           authorInput.value = data.author;
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   // Get elements from the page
 
   const reviewInput = document.getElementById("review");
-  const movieIdInput = document.getElementById("movieId");
+  const titleInput = document.getElementById("title");
   const ratingInput = document.getElementById("rating");
   const authorInput = document.getElementById("author");
   const addreviewForm = document.getElementById("addreview");
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     e.preventDefault();
     if (
 
-      !movieIdInput.value ||
+      !titleInput.value ||
       !reviewInput.value ||
       !authorInput.value ||
       !ratingInput.value
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     }
     // Create a newReview object to send off to the backend
     const newReview = {
-      movieId: movieIdInput.value.trim(),
+      title: titleInput.value.trim(),
       review: reviewInput.value.trim(),
       rating: ratingInput.value.trim(),
       author: authorInput.value.trim(),

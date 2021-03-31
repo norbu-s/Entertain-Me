@@ -34,7 +34,7 @@ module.exports = (app) => {
     console.log(req.body);
     db.Review.create({
       //id: req.body.id,
-      movieId: req.body.movieId,
+      title: req.body.title,
       //title: req.body.title,
       review: req.body.review,
       rating: req.body.rating,
