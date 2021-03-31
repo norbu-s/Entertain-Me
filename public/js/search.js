@@ -30,7 +30,7 @@ function displayMovieInfo() {
 
     function displayMovieInfo(movieTitle) {
 
-        const queryURL = '/api/search/' + movieTitle;
+        const queryURL = '/api/search/:title' //'/api/search/' + movieTitle;
 
 
         $.ajax({
@@ -132,4 +132,5 @@ function displayMovieInfo() {
 
         //render buttons
         renderButtons()
-    })
+    });
+}
