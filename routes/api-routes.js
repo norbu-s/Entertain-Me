@@ -1,39 +1,46 @@
 // Requiring our Todo model
-const db = require('../models');
+const db = require("../models");
+const axios = require("axios");
 
 // Routes
 // =============================================================
 module.exports = (app) => {
-    app.get('/api/search/:title', (req, res) => {
-        db.Movies.findAll({}).then((movies) => {
+    app.get("/api/search/:title", (req, res) => {
+        db.Movies.findAll({
+            where: { title: req.params.title },
+        }).then((movies) => {
             if (movies.length === 0) {
-
-                axios.get("https://www.omdbapi.com/?t=" + req.params.title + "&apikey=trilogy").then(omdbdata => {
-                    // TODO: insert into movies database using sequelize here
-                    db.Movies.create({
-                        title: movie.title,
-                        genre: movie.genre,
-                        plot: movie.plot,
-                        director: movie.director,
-                        actors: movie.actors,
-                        year: movie.year,
-                        image: movie.image,
-                    }).then((omdbdata) => res.json(omdbdata.data));
-                    console.log(omdbdata.data);
-                });
+                axios
+                    .get(
+                        "https://www.omdbapi.com/?t=" + req.params.title + "&apikey=trilogy"
+                    )
+                    .then((omdbdata) => {
+                        // TODO: insert into movies database using sequelize here
+                        console.log(omdbdata);
+                        db.Movies.create({
+                            title: omdbdata.data.Title,
+                            genre: omdbdata.data.Genre,
+                            plot: omdbdata.data.Plot,
+                            director: omdbdata.data.Director,
+                            actors: omdbdata.data.Actors,
+                            year: omdbdata.data.Year,
+                            image: omdbdata.data.Poster,
+                        }).then((omdbdata) => res.json(omdbdata));
+                    });
             } else {
                 res.json(movies);
             }
-        })
+        });
     });
     // GET route for getting all of the posts
-    app.get('/api/posts/', (req, res) => {
+    app.get("/api/posts/", (req, res) => {
         db.Post.findAll({}).then((dbPost) => res.json(dbPost));
     });
 
     // Get route for returning posts of a specific source
-    app.get('/api/posts/source/:source', (req, res) => {
-        db.Post.findAll({ // GET * FROM posts WHERE source = req.params.source
+    app.get("/api/posts/source/:source", (req, res) => {
+        db.Post.findAll({
+            // GET * FROM posts WHERE source = req.params.source
             where: {
                 source: req.params.source,
             },
@@ -43,7 +50,7 @@ module.exports = (app) => {
     });
 
     // Get route for retrieving a single review
-    app.get('/api/posts/:id', (req, res) => {
+    app.get("/api/posts/:id", (req, res) => {
         db.Post.findOne({
             where: {
                 id: req.params.id,
@@ -52,7 +59,7 @@ module.exports = (app) => {
     });
 
     // POST route for saving a new review
-    app.post('/api/posts', (req, res) => {
+    app.post("/api/posts", (req, res) => {
         console.log(req.body);
         db.Post.create({
             title: req.body.title,
@@ -64,7 +71,7 @@ module.exports = (app) => {
     });
 
     // DELETE route for deleting reviews
-    app.delete('/api/posts/:id', (req, res) => {
+    app.delete("/api/posts/:id", (req, res) => {
         db.Post.destroy({
             where: {
                 id: req.params.id,
@@ -73,7 +80,7 @@ module.exports = (app) => {
     });
 
     // PUT route for updating posts
-    app.put('/api/posts', (req, res) => {
+    app.put("/api/posts", (req, res) => {
         db.Post.update(req.body, {
             where: {
                 id: req.body.id,
