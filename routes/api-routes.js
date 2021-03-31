@@ -5,18 +5,18 @@ const db = require('../models');
 // =============================================================
 module.exports = (app) => {
   // GET route for getting all of the posts
-  app.get('/api/reviews/', (req, res) => {
-    db.Post.findAll({}).then((dbPost) => res.json(dbPost));
+  app.get('/api/reviews/', (req, res) => {  // same format must be lower case, plural in api/ path 
+    db.Review.findAll({}).then((dbReview) => res.json(dbReview)); //Review is same format as variable Post in review.js in original excercise which was Post (capital P and singular)
   });
 
   // Get route for returning reviews of a specific source
   app.get('/api/reviews/source/:source', (req, res) => {
-    db.Post.findAll({ // GET * FROM reviews WHERE source = req.params.source
+    db.Review.findAll({ // GET * FROM reviews WHERE source = req.params.source
       where: {
         source: req.params.source,
       },
-    }).then((dbReviews) => {
-      res.json(dbReviews);
+    }).then((dbReview) => {
+      res.json(dbReview);
     });
   });
 
