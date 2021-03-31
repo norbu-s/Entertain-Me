@@ -5,19 +5,19 @@ document.addEventListener("DOMContentLoaded", (e) => {
   }
 
   const showreviewContainer = document.querySelector(".showreview-container");
-  const postSourceSelect = document.getElementById("source");
+  const reviewSourceSelect = document.getElementById("source");
 
-  let posts;
+  let reviews;
 
-  // Function to grab posts from the database
-  const getPosts = (source) => {
+  // Function to grab reviews from the database
+  const getReviews = (source) => {
     let sourceString = source || "";
     if (sourceString) {
       sourceString = sourceString.replace(" ", "");
       sourceString = `source/${sourceString}`;
     }
 
-    fetch(`/api/posts/${sourceString}`, {
+    fetch(`/api/reviews/${sourceString}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -25,10 +25,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success in getting posts:", data);
-        posts = data;
+        console.log("Success in getting reviews:", data);
+        reviews = data;
 
-        if (!posts.length) {
+        if (!reviews.length) {
           displayEmpty();
         } else {
           initializeRows();
@@ -37,106 +37,105 @@ document.addEventListener("DOMContentLoaded", (e) => {
       .catch((error) => console.error("Error:", error));
   };
 
-  // Function to make DELETE request for a post
-  const deletePost = (id) => {
-    fetch(`/api/posts/${id}`, {
+  // Function to make DELETE request for a review
+  const deleteReview = (id) => {
+    fetch(`/api/reviews/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-    }).then(() => getPosts(postSourceSelect.value));
+    }).then(() => getReviews(reviewSourceSelect.value));
   };
 
-  // Getting initial list of posts
-  getPosts();
+  // Getting initial list of reviews
+  getReviews();
 
-  // Function to help construct the post HTML content inside showreviewContainer
+  // Function to help construct the review HTML content inside showreviewContainer
   const initializeRows = () => {
     showreviewContainer.innerHTML = "";
-    const postsToAdd = [];
+    const reviewsToAdd = [];
 
-    posts.forEach((post) => postsToAdd.push(createNewRow(post)));
-    postsToAdd.forEach((post) => showreviewContainer.appendChild(post));
+    reviews.forEach((review) => reviewsToAdd.push(createNewRow(review)));
+    reviewsToAdd.forEach((review) => showreviewContainer.appendChild(review));
   };
 
-  const createNewRow = (post) => {
-    // Postcard div
-    const newPostCard = document.createElement("div");
-    newPostCard.classList.add("card");
+  const createNewRow = (review) => {
+    // Reviewcard div
+    const newReviewCard = document.createElement("div");
+    newReviewCard.classList.add("card");
 
     // Heading
-    const newPostCardHeading = document.createElement("div");
-    newPostCardHeading.classList.add("card-header");
+    const newReviewCardHeading = document.createElement("div");
+    newReviewCardHeading.classList.add("card-header");
 
     // Delete button
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "x";
     deleteBtn.classList.add("delete", "btn", "btn-danger");
-    deleteBtn.addEventListener("click", handlePostDelete);
+    deleteBtn.addEventListener("click", handleReviewDelete);
 
     // Edit button
     const editBtn = document.createElement("button");
     editBtn.textContent = "EDIT";
     editBtn.classList.add("delete", "btn", "btn-danger");
-    editBtn.addEventListener("click", handlePostEdit);
+    editBtn.addEventListener("click", handleReviewEdit);
 
-    // New post info
-    const newPostTitle = document.createElement("h2");
-    const newPostDate = document.createElement("small");
-    const newPostRating = document.createElement("h5");
-    const newPostAuthor = document.createElement("p");
+    // New review info
+    const newReviewTitle = document.createElement("h2");
+    const newReviewDate = document.createElement("small");
+    const newReviewRating = document.createElement("h5");
+    const newReviewAuthor = document.createElement("p");
 
-    // New post source
-    const newPostSource = document.createElement("h5");
-    newPostSource.textContent = post.source;
-    newPostSource.style.float = "right";
-    newPostSource.style.fontWeight = "700";
-    newPostSource.style.marginTop = "-15px";
+    // New review source
+    const newReviewSource = document.createElement("h5");
+    newReviewSource.textContent = review.source;
+    newReviewSource.style.float = "right";
+    newReviewSource.style.fontWeight = "700";
+    newReviewSource.style.marginTop = "-15px";
 
-    // New post card body
-    const newPostCardBody = document.createElement("div");
-    newPostCardBody.classList.add("card-body");
+    // New review card body
+    const newReviewCardBody = document.createElement("div");
+    newReviewCardBody.classList.add("card-body");
 
-    // New Post
-    const newPostBody = document.createElement("p");
-    newPostTitle.textContent = post.title;
-    newPostBody.textContent = post.review;
-    newPostRating.textContent = post.rating;
-    newPostAuthor.textContent = post.author;
+    // New Review
+    const newReviewBody = document.createElement("p");
+    newReviewTitle.textContent = review.title;
+    newReviewBody.textContent = review.review;
+    newReviewRating.textContent = review.rating;
+    newReviewAuthor.textContent = review.author;
 
-    const formattedDate = new Date(post.createdAt).toLocaleDateString();
-    newPostDate.textContent = ` (${formattedDate})`;
+  
 
-    newPostTitle.appendChild(newPostDate);
-    newPostCardHeading.appendChild(deleteBtn);
-    newPostCardHeading.appendChild(editBtn);
-    newPostCardHeading.appendChild(newPostTitle);
-    newPostCardHeading.appendChild(newPostSource);
-    newPostCardHeading.appendChild(newPostDate);
-    newPostCardBody.appendChild(newPostRating);
-    newPostCardBody.appendChild(newPostBody);
-    newPostCardBody.appendChild(newPostAuthor);
-    newPostCard.appendChild(newPostCardHeading);
-    newPostCard.appendChild(newPostCardBody);
-    newPostCard.setAttribute("data-post", JSON.stringify(post));
+    newReviewTitle.appendChild(newReviewDate);
+    newReviewCardHeading.appendChild(deleteBtn);
+    newReviewCardHeading.appendChild(editBtn);
+    newReviewCardHeading.appendChild(newReviewTitle);
+    newReviewCardHeading.appendChild(newReviewSource);
+    newReviewCardHeading.appendChild(newReviewDate);
+    newReviewCardBody.appendChild(newReviewRating);
+    newReviewCardBody.appendChild(newReviewBody);
+    newReviewCardBody.appendChild(newReviewAuthor);
+    newReviewCard.appendChild(newReviewCardHeading);
+    newReviewCard.appendChild(newReviewCardBody);
+    newReviewCard.setAttribute("data-review", JSON.stringify(review));
 
-    return newPostCard;
+    return newReviewCard;
   };
 
-  const handlePostDelete = (e) => {
-    const currentPost = JSON.parse(
-      e.target.parentElement.parentElement.dataset.post
+  const handleReviewDelete = (e) => {
+    const currentReview = JSON.parse(
+      e.target.parentElement.parentElement.dataset.review
     );
-    console.log("handlePostDelete -> currentPost", currentPost);
-    deletePost(currentPost.id);
+    console.log("handleReviewDelete -> currentReview", currentReview);
+    deleteReview(currentReview.id);
   };
 
-  const handlePostEdit = (e) => {
-    const currentPost = JSON.parse(
-      e.target.parentElement.parentElement.dataset.post
+  const handleReviewEdit = (e) => {
+    const currentReview = JSON.parse(
+      e.target.parentElement.parentElement.dataset.review
     );
-    console.log("handlePostDelete -> currentPost", currentPost);
-    window.location.href = `/addreview?post_id=${currentPost.id}`; // need to check later
+    console.log("handleReviewDelete -> currentReview", currentReview);
+    window.location.href = `/addreview?review_id=${currentReview.id}`; // need to check later
   };
 
   const displayEmpty = () => {
@@ -144,14 +143,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
     const messageH2 = document.createElement("h4");
     messageH2.style.textAlign = "center";
     messageH2.style.marginTop = "50px";
-    messageH2.innerHTML = `No posts yet for this source. <br>Click <a href="/addreview">here</a> to make a new post.`; // need to check later
+    messageH2.innerHTML = `No reviews yet for this source. <br>Click <a href="/addreview">here</a> to make a new review.`; // need to check later
     showreviewContainer.appendChild(messageH2);
   };
 
   const handleSourceChange = (e) => {
-    const newPostSource = e.target.value;
-    console.log("handleSourceChange -> newPostSource", newPostSource);
-    getPosts(newPostSource.toLowerCase());
+    const newReviewSource = e.target.value;
+    console.log("handleSourceChange -> newReviewSource", newReviewSource);
+    getReviews(newReviewSource.toLowerCase());
   };
-  postSourceSelect.addEventListener("change", handleSourceChange);
+  reviewSourceSelect.addEventListener("change", handleSourceChange);
 });
