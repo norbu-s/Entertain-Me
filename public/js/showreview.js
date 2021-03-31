@@ -69,24 +69,25 @@ document.addEventListener("DOMContentLoaded", (e) => {
     newPostCardHeading.classList.add("card-header");
 
     // Delete button
-    const deleteBtn = document.createElement("i");
-    deleteBtn.classList.add("fas", "fa-trash");
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "x";
+    deleteBtn.classList.add("delete", "btn", "btn-danger");
     deleteBtn.addEventListener("click", handlePostDelete);
 
     // Edit button
-    const editBtn = document.createElement("i");
-    editBtn.classList.add("fas", "fa-edit");
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "EDIT";
+    editBtn.classList.add("delete", "btn", "btn-danger");
     editBtn.addEventListener("click", handlePostEdit);
-
 
     // New post info
     const newPostTitle = document.createElement("h2");
     const newPostDate = document.createElement("small");
-    const newPostRating = document.createElement("p");
+    const newPostRating = document.createElement("h5");
     const newPostAuthor = document.createElement("p");
 
     // New post source
-    const newPostSource = document.createElement("small");
+    const newPostSource = document.createElement("h5");
     newPostSource.textContent = post.source;
     newPostSource.style.float = "right";
     newPostSource.style.fontWeight = "700";
@@ -100,8 +101,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
     const newPostBody = document.createElement("p");
     newPostTitle.textContent = post.title;
     newPostBody.textContent = post.review;
-    newPostRating.textContent = "Rating: " + " " + post.rating;
-    newPostAuthor.textContent = "Author: " + " " + post.author;
+    newPostRating.textContent = post.rating;
+    newPostAuthor.textContent = post.author;
 
     const formattedDate = new Date(post.createdAt).toLocaleDateString();
     newPostDate.textContent = ` (${formattedDate})`;
@@ -111,12 +112,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
     newPostCardHeading.appendChild(editBtn);
     newPostCardHeading.appendChild(newPostTitle);
     newPostCardHeading.appendChild(newPostSource);
-    // newPostCardHeading.appendChild(newPostDate);
-    // newPostCardBody.appendChild(newPostRatingHead);
-    newPostCardBody.appendChild(newPostBody);
+    newPostCardHeading.appendChild(newPostDate);
     newPostCardBody.appendChild(newPostRating);
+    newPostCardBody.appendChild(newPostBody);
     newPostCardBody.appendChild(newPostAuthor);
-    newPostCardBody.appendChild(newPostDate);
     newPostCard.appendChild(newPostCardHeading);
     newPostCard.appendChild(newPostCardBody);
     newPostCard.setAttribute("data-post", JSON.stringify(post));
