@@ -33,9 +33,9 @@ module.exports = (app) => {
   app.post('/api/reviews', (req, res) => {
     console.log(req.body);
     db.Review.create({
-      //id: req.body.id
-      //movieId: req.body.movieId
-      title: req.body.title,
+      //id: req.body.id,
+      movieId: req.body.movieId,
+      //title: req.body.title,
       review: req.body.review,
       rating: req.body.rating,
       source: req.body.source,
