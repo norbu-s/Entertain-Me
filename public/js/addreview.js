@@ -4,12 +4,12 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   // Check for query string and set flag, "updating", to false initially
   const url = window.location.search;
-  let postId;
+  let reviewId;
   let updating = false;
 
-  // Get a specific post
-  const getPostData = (id) => {
-    fetch(`/api/posts/${id}`, {
+  // Get a specific review
+  const getReviewData = (id) => {
+    fetch(`/api/reviews/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -18,14 +18,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
       .then((response) => response.json())
       .then((data) => {
         if (data) {
-          console.log(`Success in grabbing post ${id}`, data);
+          console.log(`Success in grabbing review ${id}`, data);
 
           // Populate the form with the existing post
-          titleInput.value = data.title;
+          movieIdInput.value = data.movieId;
           reviewInput.value = data.review;
           ratingInput.value = data.rating;
           authorInput.value = data.author;
-          postSourceSelect.value = data.source;
+          reviewSourceSelect.value = data.source;
 
           updating = true;
         }
@@ -35,32 +35,34 @@ document.addEventListener("DOMContentLoaded", (e) => {
       });
   };
 
-  // Extract the post ID from the URL
-  if (url.indexOf("?post_id=") !== -1) {
-    postId = url.split("=")[1];
-    getPostData(postId);
+  // Extract the review ID from the URL
+  if (url.indexOf("?review_id=") !== -1) {
+    reviewId = url.split("=")[1];
+    getReviewData(reviewId);
   }
 
   // Get elements from the page
+
   const reviewInput = document.getElementById("review");
-  const titleInput = document.getElementById("title");
+  const movieIdInput = document.getElementById("movieId");
   const ratingInput = document.getElementById("rating");
   const authorInput = document.getElementById("author");
   const addreviewForm = document.getElementById("addreview");
-  const postSourceSelect = document.getElementById("source");
+  const reviewSourceSelect = document.getElementById("source");
 
   // Set default value for the source
-  postSourceSelect.value = "Streaming";
+  reviewSourceSelect.value = "Streaming";
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (
-      !titleInput.value ||
+
+      !movieIdInput.value ||
       !reviewInput.value ||
       !authorInput.value ||
       !ratingInput.value
     ) {
-      alert("Your post is missing some content");
+      alert("Your review is missing some content");
     }
 
     // Set alerts where rating values are outside the fixed range
@@ -71,40 +73,40 @@ document.addEventListener("DOMContentLoaded", (e) => {
     if (ratingInput.value < 1) {
       alert("Your rating has to be between 1 and 5");
     }
-    // Create a newPost object to send off to the backend
-    const newPost = {
-      title: titleInput.value.trim(),
+    // Create a newReview object to send off to the backend
+    const newReview = {
+      movieId: movieIdInput.value.trim(),
       review: reviewInput.value.trim(),
       rating: ratingInput.value.trim(),
       author: authorInput.value.trim(),
-      source: postSourceSelect.value,
+      source: reviewSourceSelect.value,
     };
-    console.log("handleFormSubmit -> newPost", newPost);
+    console.log("handleFormSubmit -> newReview", newReview);
 
     // Check if the user is updating or creating and preform said function
     if (updating) {
-      newPost.id = postId;
-      updatePost(newPost);
+      newReview.id = reviewId;
+      updateReview(newReview);
     } else {
-      submitPost(newPost);
+      submitReview(newReview);
     }
   };
 
   // Event listener for when the showreview is submitted
   addreviewForm.addEventListener("submit", handleFormSubmit);
 
-  // Event handler for when a user submits a post
-  const submitPost = (post) => {
-    fetch("/api/posts", {
+  // Event handler for when a user submits a review
+  const submitReview = (review) => {
+    fetch("/api/reviews", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(post),
+      body: JSON.stringify(review),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success in submitting post:", data);
+        console.log("Success in submitting review:", data);
         window.location.href = "/showreview"; // may need to replace later
       })
       .catch((error) => {
@@ -112,17 +114,17 @@ document.addEventListener("DOMContentLoaded", (e) => {
       });
   };
 
-  // Update a post and bring user to /showreview
-  const updatePost = (post) => {
-    fetch("/api/posts", {
+  // Update a review and bring user to /showreview
+  const updateReview = (review) => {
+    fetch("/api/reviews", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(post),
+      body: JSON.stringify(review),
     })
       .then(() => {
-        console.log("Attempting update to post");
+        console.log("Attempting update to review");
         window.location.href = "/showreview"; // may need to replace later
       })
       .catch((error) => {
