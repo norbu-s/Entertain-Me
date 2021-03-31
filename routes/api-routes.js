@@ -44,12 +44,12 @@ module.exports = (app) => {
   });
 
   // DELETE route for deleting reviews
-  app.delete('/api/posts/:id', (req, res) => {
-    db.Post.destroy({
+  app.delete('/api/reviews/:id', (req, res) => {
+    db.Review.destroy({
       where: {
         id: req.params.id,
       },
-    }).then((dbPost) => res.json(dbPost));
+    }).then((dbReview) => res.json(dbReview));
   });
 
     // PUT route for updating posts
