@@ -30,15 +30,17 @@ module.exports = (app) => {
   });
 
   // POST route for saving a new review
-  app.post('/api/posts', (req, res) => {
+  app.post('/api/reviews', (req, res) => {
     console.log(req.body);
-    db.Post.create({
+    db.Review.create({
+      //id: req.body.id
+      //movieId: req.body.movieId
       title: req.body.title,
       review: req.body.review,
       rating: req.body.rating,
       source: req.body.source,
       author: req.body.author,
-    }).then((dbPost) => res.json(dbPost));
+    }).then((dbReview) => res.json(dbReview));
   });
 
   // DELETE route for deleting reviews
