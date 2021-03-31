@@ -21,12 +21,12 @@ module.exports = (app) => {
   });
 
   // Get route for retrieving a single review
-  app.get('/api/posts/:id', (req, res) => {
-    db.Post.findOne({
+  app.get('/api/reviews/:id', (req, res) => {
+    db.Review.findOne({
       where: {
         id: req.params.id,
       },
-    }).then((dbPost) => res.json(dbPost));
+    }).then((dbReview) => res.json(dbReview));
   });
 
   // POST route for saving a new review
