@@ -1,10 +1,45 @@
 // Requiring our Todo model
-const db = require('../models');
+const db = require("../models");
+const axios = require("axios");
 
 // Routes
 // =============================================================
 module.exports = (app) => {
-  // GET route for getting all of the posts
+
+
+
+    app.get("/api/search/:title", (req, res) => {
+        db.Movies.findAll({
+            where: { title: req.params.title },
+        }).then((movies) => {
+            if (movies.length === 0) {
+                axios
+                    .get(
+                        "https://www.omdbapi.com/?t=" + req.params.title + "&apikey=trilogy"
+                    )
+                    .then((omdbdata) => {
+                        // TODO: insert into movies database using sequelize here
+                        console.log(omdbdata);
+                        db.Movies.create({
+                            title: omdbdata.data.Title,
+                            genre: omdbdata.data.Genre,
+                            plot: omdbdata.data.Plot,
+                            director: omdbdata.data.Director,
+                            actors: omdbdata.data.Actors,
+                            year: omdbdata.data.Year,
+                            image: omdbdata.data.Poster,
+                        }).then((omdbdata) => res.json(omdbdata));
+                    });
+            } else {
+                res.json(movies);
+            }
+        });
+    });
+ 
+
+
+
+      // GET route for getting all of the posts
   app.get('/api/reviews/', (req, res) => {  // same format must be lower case, plural in api/ path 
     db.Review.findAll({}).then((dbReview) => res.json(dbReview)); //Review is same format as variable Post in review.js in original excercise which was Post (capital P and singular)
   });
@@ -17,8 +52,7 @@ module.exports = (app) => {
       },
     }).then((dbReview) => {
       res.json(dbReview);
-    });
-  });
+
 
   // Get route for retrieving a single review
   app.get('/api/reviews/:id', (req, res) => {
@@ -52,7 +86,7 @@ module.exports = (app) => {
     }).then((dbReview) => res.json(dbReview));
   });
 
-    // PUT route for updating posts
+    // PUT route for updating reviews
   app.put('/api/reviews', (req, res) => {
     db.Review.update(req.body, {
       where: {
@@ -60,4 +94,6 @@ module.exports = (app) => {
       },
     }).then((dbReview) => res.json(dbReview));
   });
-};
+})
+  })
+}
