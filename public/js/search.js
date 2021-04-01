@@ -1,11 +1,11 @@
 var searchText = $(".search-data")
 var moviesHistory = []
-var movie
+let movie;
 
 
 // Function to set movies from MoviesHistory array into local storage
 function saveMovies() {
-        localStorage.setItem("movies", JSON.stringify(moviesHistory));
+    localStorage.setItem("movies", JSON.stringify(moviesHistory));
 }
 
 
@@ -23,91 +23,78 @@ function renderButtons() {
 }
 
 
-
-
 // Function to display movie info
+
 function displayMovieInfo() {
-   
-    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
-    
+    const queryURL = '/api/search/' + movie;
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function (response) {
+    })
+
+    .then(function(response) {
             $(".search-data").html("")
 
-            var movieDiv = $("<div class='movie'>")
+            const movieDiv = $("<div class='movie'>")
             movieDiv.html("<h4>You Want to Review</h4><br>")
             searchText.prepend(movieDiv)
 
-            var imgURL = response.Poster;
-            var image = $("<img class='poster'>").attr("src", imgURL);
+            const imgURL = response.Poster;
+            const image = $("<img class='poster'>").attr("src", imgURL);
             movieDiv.append(image);
-          
-            var title = response.Title;
-            var pOne = $("<h2>").text(title);
 
-            var genre = response.Genre;
-            var pTwo = $("<p>").text("Genre: " + genre);
+            const title = response.Title;
+            const pOne = $("<h2>").text(title);
+
+            const genre = response.Genre;
+            const pTwo = $("<p>").text("Genre: " + genre);
             movieDiv.append(pOne);
-            var plot = response.Plot;
-            var pThree = $("<p>").text("Plot: " + plot);
+            const plot = response.Plot;
+            const pThree = $("<p>").text("Plot: " + plot);
             movieDiv.append(pTwo);
-            var director = response.Director;
-            var pFour = $("<p>").text("Director: " + director);
+            const director = response.Director;
+            const pFour = $("<p>").text("Director: " + director);
             movieDiv.append(pThree);
-            var actors = response.Actors;
-            var pFive = $("<p>").text("Actors: " + actors);
+            const actors = response.Actors;
+            const pFive = $("<p>").text("Actors: " + actors);
             movieDiv.append(pFour);
-            var year = response.Year;
-            var pSix = $("<p>").text("Year: " + year);
+            const year = response.Year;
+            const pSix = $("<p>").text("Year: " + year);
             movieDiv.append(pFive);
-      
-          
+
             if (moviesHistory.includes(response.Title) === false) {
-                moviesHistory.push(response.Title)
+                moviesHistory.push(response.Title);
             }
-            
+
             renderButtons()
             saveMovies()
-        }).then((response) => {
-          if (response.length = 0)
-          fetch('/api/movies', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(review),
-          })
         })
         .catch((error) => {
-          console.error('Error:', error);
+            console.error("Error:", error);
         });
-    };
-
-
+}
 
 //On click event listener for search button
-$("#run-search").on("click", function () {
+$("#run-search").on("click", function() {
     movie = $("#search-term").val()
     displayMovieInfo()
 
 })
 
 //On click event listener for movie buttons
-$(document).on("click", ".movie-btn", function () {
+$(document).on("click", ".movie-btn", function() {
     movie = $(this).attr("data-Title");
     displayMovieInfo()
 
 })
 
 //On click event listener for clear search results button
-$("#clear-search").on("click", function (){
-localStorage.clear("movies")
-moviesHistory = []
-$(".buttons-view").empty()
-//refresh page
-location.reload()
+$("#clear-search").on("click", function() {
+    localStorage.clear("movies")
+    moviesHistory = []
+    $(".buttons-view").empty()
+        //refresh page
+    location.reload()
 })
 
 
@@ -115,7 +102,7 @@ location.reload()
 
 //To run when document loads (if/else statement that will pull from local storage only if the value is not "null")
 $(document).ready(function() {
-    if(localStorage.getItem("movies") !== null) {
+    if (localStorage.getItem("movies") !== null) {
         var savedMovie = localStorage.getItem("movies");
         var pushMovies = JSON.parse(savedMovie)
         moviesHistory = moviesHistory.concat(pushMovies)
@@ -123,4 +110,4 @@ $(document).ready(function() {
 
     //render buttons
     renderButtons()
-  })
+});
