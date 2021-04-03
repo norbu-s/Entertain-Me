@@ -38,8 +38,13 @@ module.exports = (app) => {
  
 
 
+// // Requiring our Todo model
+// const db = require('../models');
 
-      // GET route for getting all of the posts
+// // Routes
+// // =============================================================
+// module.exports = (app) => {
+  // GET route for getting all of the posts
   app.get('/api/reviews/', (req, res) => {  // same format must be lower case, plural in api/ path 
     db.Review.findAll({}).then((dbReview) => res.json(dbReview)); //Review is same format as variable Post in review.js in original excercise which was Post (capital P and singular)
   });
@@ -52,7 +57,8 @@ module.exports = (app) => {
       },
     }).then((dbReview) => {
       res.json(dbReview);
-
+    });
+  });
 
   // Get route for retrieving a single review
   app.get('/api/reviews/:id', (req, res) => {
@@ -68,8 +74,8 @@ module.exports = (app) => {
     console.log(req.body);
     db.Review.create({
       //id: req.body.id,
+      // movieId: req.body.movieId,
       title: req.body.title,
-      //title: req.body.title,
       review: req.body.review,
       rating: req.body.rating,
       source: req.body.source,
@@ -86,7 +92,7 @@ module.exports = (app) => {
     }).then((dbReview) => res.json(dbReview));
   });
 
-    // PUT route for updating reviews
+    // PUT route for updating posts
   app.put('/api/reviews', (req, res) => {
     db.Review.update(req.body, {
       where: {
@@ -94,6 +100,4 @@ module.exports = (app) => {
       },
     }).then((dbReview) => res.json(dbReview));
   });
-})
-  })
-}
+};
