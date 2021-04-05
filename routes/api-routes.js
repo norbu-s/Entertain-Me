@@ -102,9 +102,11 @@ module.exports = (app) => {
     });
 
 
-    app.get(`/api/movies/${title}`, (req, res) => {
-        db.Movies.findOne({
-            where: { title: req.params.title },
+    app.get("/api/movies/:title", (req, res) => {
+        db.Movies.findAll({
+            where: {
+                title: req.params.title
+            },
         }).then((dbMovies) => res.json(dbMovies));
     });
 };

@@ -1,7 +1,7 @@
 let searchText = $(".search-data")
 let moviesHistory = []
 let movie;
-let title;
+
 
 
 // Function to set movies from MoviesHistory array into local storage
@@ -26,19 +26,18 @@ function renderButtons() {
 
 //  //UPDATE THE BELOW FUNCTION TO PULL THE MOVIE TITLE FROM THE DB - SAVING REVIEW WORKS WITHOUT THIS
 //   // Get a specific movie
-// 
-const getMovie = (title) => {
-    fetch(`/api/movies/${title}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
+
+let title = {};
+
+function getTitle() {
+    const url = `/api/movies/${title}`;
+    $.ajax({
+            type: 'GET',
+            url: url,
         })
-        .then((response) => response.json())
         .then((data) => {
-            if (data) {
-                console.log(`Success in grabbing movie ${title}`, data);
-            };
+            console.log("Success in getting movie:", data);
+            title = data;
         })
 }
 
@@ -65,10 +64,17 @@ const getMovie = (title) => {
 //         });
 // }
 
+//event listerner
+$("btn btn-danger movie-btn").on("click", function() {
+    title = $("#search-term").val()
+    getTitle()
+
+})
+
 //On click event listener for movie buttons
 $(document).on("click", ".movie-btn", function() {
-    movie = $(this).attr("data-title");
-    getMovie(title);
+    title = $(this).attr("data-title");
+    getTitle();
 });
 
 
