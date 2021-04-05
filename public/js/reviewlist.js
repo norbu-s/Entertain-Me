@@ -1,6 +1,7 @@
-var searchText = $(".search-data")
-var moviesHistory = []
+let searchText = $(".search-data")
+let moviesHistory = []
 let movie;
+let title;
 
 
 // Function to set movies from MoviesHistory array into local storage
@@ -24,61 +25,51 @@ function renderButtons() {
 
 
 //  //UPDATE THE BELOW FUNCTION TO PULL THE MOVIE TITLE FROM THE DB - SAVING REVIEW WORKS WITHOUT THIS
-//   // Get a specific review
-//   const getMovieTitle = (id) => {
-//     fetch(`/api/movies/${id}`, {
-//       method: "GET",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         if (data) {
-//           console.log(`Success in grabbing movie ${id}`, data);
-
-//           // Populate the form with the existing movie title
-//           titleInput.value = data.title;
- 
-
-//           updating = true;
-//         }
-//       })
-//       .catch((error) => {
-//         console.error("Error:", error);
-//       });
-//   };
-
-
-
-
-
-//function to pull movies from database
-
+//   // Get a specific movie
+// 
 const getMovie = (title) => {
     fetch(`/api/movies/${title}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data) {
-          console.log(`Success in grabbing movie ${title}`, data);
-        };
-    })
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data) {
+                console.log(`Success in grabbing movie ${title}`, data);
+            };
+        })
 }
 
 
 
 
+//function to pull movie from database
+
+// const getMovieTitle = (title) => {
+//     fetch(`/api/movies/${title}`, {
+//             method: "GET",
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//         }).then(function(response) {
+//             $(".data-title").html("")
+//             const movieDiv = $("<div class='movie'>")
+//             const title = response.title;
+//             const pOne = $("<h2>").text(title);
+//             renderButtons()
+//         })
+//         .catch((error) => {
+//             console.error("Error:", error);
+//         });
+// }
+
 //On click event listener for movie buttons
 $(document).on("click", ".movie-btn", function() {
     movie = $(this).attr("data-title");
-    getMovie()
-
-})
+    getMovie(title);
+});
 
 
 
