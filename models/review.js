@@ -55,19 +55,4 @@ module.exports = (sequelize, DataTypes) => {
 
 
   
-    // id: {
-    //   type: DataTypes.DECIMAL,
-    //   allowNull: false,
-    //   validate: {
-    //     len: [1],
-    //   },
-
-    // },
-
-      // title: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    //   validate: {
-    //     len: [1],
-    //   },
-    // },
+ 
