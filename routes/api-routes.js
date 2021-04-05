@@ -40,8 +40,8 @@ module.exports = (app) => {
 
 
   // GET route for getting all of the posts
-  app.get('/api/reviews/', (req, res) => {  // same format must be lower case, plural in api/ path 
-    db.Review.findAll({}).then((dbReview) => res.json(dbReview)); //Review is same format as variable Post in review.js in original excercise which was Post (capital P and singular)
+  app.get('/api/reviews/', (req, res) => {  
+    db.Review.findAll({}).then((dbReview) => res.json(dbReview)); 
   });
 
   // Get route for returning reviews of a specific source
