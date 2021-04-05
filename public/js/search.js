@@ -45,22 +45,23 @@ function displayMovieInfo() {
 
             const title = response.title;
             const pOne = $("<h2>").text(title);
+            
 
             const genre = response.genre;
             const pTwo = $("<p>").text("Genre: " + genre);
-            movieDiv.append(pOne);
+            movieDiv.append(pTwo);
             const plot = response.plot;
             const pThree = $("<p>").text("Plot: " + plot);
-            movieDiv.append(pTwo);
+            movieDiv.append(pThree);
             const director = response.director;
             const pFour = $("<p>").text("Director: " + director);
-            movieDiv.append(pThree);
+            movieDiv.append(pFour);
             const actors = response.actors;
             const pFive = $("<p>").text("Actors: " + actors);
-            movieDiv.append(pFour);
+            movieDiv.append(pFive);
             const year = response.year;
             const pSix = $("<p>").text("Year: " + year);
-            movieDiv.append(pFive);
+            movieDiv.append(pSix);
 
             if (moviesHistory.includes(response.title) === false) {
                 moviesHistory.push(response.title);
@@ -75,22 +76,7 @@ function displayMovieInfo() {
 }
 
 
-//function to pull movies from database
 
-const getMovie = (title) => {
-    fetch(`/api/movies/${title}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data) {
-          console.log(`Success in grabbing movie ${title}`, data);
-        };
-    })
-}
 
 
 //On click event listener for search button
@@ -103,7 +89,7 @@ $("#run-search").on("click", function() {
 //On click event listener for movie buttons
 $(document).on("click", ".movie-btn", function() {
     movie = $(this).attr("data-title");
-    getMovie()
+    displayMovieInfo()
 
 })
 
