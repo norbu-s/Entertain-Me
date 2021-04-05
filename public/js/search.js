@@ -26,13 +26,13 @@ function renderButtons() {
 // Function to display movie info
 
 function displayMovieInfo() {
-    const queryURL = '/api/search/' + movie;
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    })
-
-    .then(function(response) {
+    fetch("/api/movies/:title", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then(function(response) {
             $(".search-data").html("")
 
             const movieDiv = $("<div class='movie'>")
@@ -45,7 +45,7 @@ function displayMovieInfo() {
 
             const title = response.title;
             const pOne = $("<h2>").text(title);
-            
+
 
             const genre = response.genre;
             const pTwo = $("<p>").text("Genre: " + genre);
