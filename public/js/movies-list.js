@@ -1,5 +1,8 @@
-var moviesHistory = []
-var movie
+//NOT USING THIS FILE CURRENTLY CAN MAYBE DELETE BUT WANT TO KEEP JUST IN CASE UNTIL SURE
+
+
+//var moviesHistory = []
+//var movie
 
 
 
@@ -13,37 +16,31 @@ function renderButtons() {
         a.attr("data-title", moviesHistory[i]);
         a.text(moviesHistory[i]);
         $(".buttons-view").prepend(a);
+         }
     }
+
+
+// Function to grab movies from the database
+const getMovie = (title) => {
+    fetch(`/api/movies/${title}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          console.log(`Success in grabbing movie ${title}`, data);
+        };
+    })
 }
-
-
-
-
-// Function to display movie info
-function displayMovieInfo() {
-   
-    const queryURL = '/api/search/' + movie;
-    
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function(response) {
-        const movieDiv = $("<div class='movie'>");
-            if (moviesHistory.includes(response.title) === false) {
-                moviesHistory.push(response.title)
-            }
-            
-            renderButtons()
-
-        })
-};
-
 
 
 //On click event listener for movie buttons
 $(document).on("click", ".movie-btn", function () {
     movie = $(this).attr("data-title");
-    displayMovieInfo()
+    getMovie()
 
 })
 
@@ -55,7 +52,10 @@ $(document).ready(function() {
         var pushMovies = JSON.parse(savedMovie)
         moviesHistory = moviesHistory.concat(pushMovies)
     }
+})
+
+
 
     //render buttons
     renderButtons()
-  })
+
