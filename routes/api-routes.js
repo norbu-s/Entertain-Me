@@ -36,10 +36,17 @@ module.exports = (app) => {
         });
     });
  
+  // Get route for retrieving a single movie
+  app.get('/api/movies/:id', (req, res) => {
+    db.Movies.findOne({
+      where: {
+        id: req.params.id,
+      },
+    }).then((dbMovies) => res.json(dbMovies));
+  });
 
 
-
-  // GET route for getting all of the posts
+  // GET route for getting all of the reviews
   app.get('/api/reviews/', (req, res) => {  
     db.Review.findAll({}).then((dbReview) => res.json(dbReview)); 
   });
