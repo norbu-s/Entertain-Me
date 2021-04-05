@@ -74,6 +74,25 @@ function displayMovieInfo() {
         });
 }
 
+
+//function to pull movies from database
+
+const getMovie = (title) => {
+    fetch(`/api/movies/${title}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          console.log(`Success in grabbing movie ${title}`, data);
+        };
+    })
+}
+
+
 //On click event listener for search button
 $("#run-search").on("click", function() {
     movie = $("#search-term").val()
@@ -84,7 +103,7 @@ $("#run-search").on("click", function() {
 //On click event listener for movie buttons
 $(document).on("click", ".movie-btn", function() {
     movie = $(this).attr("data-title");
-    displayMovieInfo()
+    getMovie()
 
 })
 
