@@ -21,7 +21,7 @@ module.exports = (app) => {
                         // TODO: insert into movies database using sequelize here
                         console.log(omdbdata);
                         db.Movies.create({
-                            title: omdbdata.data.Title,
+                            title: omdbdata.data.title,
                             genre: omdbdata.data.Genre,
                             plot: omdbdata.data.Plot,
                             director: omdbdata.data.Director,
