@@ -39,29 +39,28 @@ function displayMovieInfo() {
             movieDiv.html("<h4>You Want to Review</h4><br>")
             searchText.prepend(movieDiv)
 
-            const imgURL = response.poster;
+            const imgURL = response.Poster;
             const image = $("<img class='poster'>").attr("src", imgURL);
             movieDiv.append(image);
 
             const title = response.title;
-            const pOne = $("<h2>").text("Title: " + title);
-            movieDiv.append(pOne);
+            const pOne = $("<h2>").text(title);
 
             const genre = response.genre;
             const pTwo = $("<p>").text("Genre: " + genre);
-            movieDiv.append(pTwo);
+            movieDiv.append(pOne);
             const plot = response.plot;
             const pThree = $("<p>").text("Plot: " + plot);
-            movieDiv.append(pThree);
+            movieDiv.append(pTwo);
             const director = response.director;
             const pFour = $("<p>").text("Director: " + director);
-            movieDiv.append(pFour);
+            movieDiv.append(pThree);
             const actors = response.actors;
             const pFive = $("<p>").text("Actors: " + actors);
-            movieDiv.append(pFive);
+            movieDiv.append(pFour);
             const year = response.year;
             const pSix = $("<p>").text("Year: " + year);
-            movieDiv.append(pSix);
+            movieDiv.append(pFive);
 
             if (moviesHistory.includes(response.title) === false) {
                 moviesHistory.push(response.title);
