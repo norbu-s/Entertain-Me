@@ -27,7 +27,7 @@ function renderButtons() {
 //  //UPDATE THE BELOW FUNCTION TO PULL THE MOVIE TITLE FROM THE DB - SAVING REVIEW WORKS WITHOUT THIS
 //   // Get a specific movie
 
-let title = {};
+let title;
 
 function getTitle() {
     const url = `/api/movies/${title}`;
@@ -38,31 +38,9 @@ function getTitle() {
         .then((data) => {
             console.log("Success in getting movie:", data);
             title = data;
-        })
+        });
 }
 
-
-
-
-//function to pull movie from database
-
-// const getMovieTitle = (title) => {
-//     fetch(`/api/movies/${title}`, {
-//             method: "GET",
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//         }).then(function(response) {
-//             $(".data-title").html("")
-//             const movieDiv = $("<div class='movie'>")
-//             const title = response.title;
-//             const pOne = $("<h2>").text(title);
-//             renderButtons()
-//         })
-//         .catch((error) => {
-//             console.error("Error:", error);
-//         });
-// }
 
 //event listerner
 $("btn btn-danger movie-btn").on("click", function() {

@@ -34,14 +34,15 @@ module.exports = (app) => {
         });
     });
 
-    // Get route for retrieving a single movie
-    app.get('/api/movies/:id', (req, res) => {
+    // GET movie title
+    app.get("/api/movies/:title", (req, res) => {
         db.Movies.findOne({
             where: {
-                id: req.params.id,
+                title: req.params.title,
             },
         }).then((dbMovies) => res.json(dbMovies));
     });
+
 
 
     // GET route for getting all of the reviews
@@ -99,14 +100,5 @@ module.exports = (app) => {
                 id: req.body.id,
             },
         }).then((dbReview) => res.json(dbReview));
-    });
-
-
-    app.get("/api/movies/:title", (req, res) => {
-        db.Movies.findAll({
-            where: {
-                title: req.params.title
-            },
-        }).then((dbMovies) => res.json(dbMovies));
     });
 };
