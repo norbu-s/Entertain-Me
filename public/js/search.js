@@ -16,7 +16,7 @@ function renderButtons() {
     for (var i = 0; i < moviesHistory.length; i++) {
         var a = $("<button>");
         a.addClass("btn btn-danger movie-btn");
-        a.attr("data-Title", moviesHistory[i]);
+        a.attr("data-title", moviesHistory[i]);
         a.text(moviesHistory[i]);
         $(".buttons-view").prepend(a);
     }
@@ -43,27 +43,27 @@ function displayMovieInfo() {
             const image = $("<img class='poster'>").attr("src", imgURL);
             movieDiv.append(image);
 
-            const title = response.Title;
+            const title = response.title;
             const pOne = $("<h2>").text(title);
 
-            const genre = response.Genre;
+            const genre = response.genre;
             const pTwo = $("<p>").text("Genre: " + genre);
             movieDiv.append(pOne);
-            const plot = response.Plot;
+            const plot = response.plot;
             const pThree = $("<p>").text("Plot: " + plot);
             movieDiv.append(pTwo);
-            const director = response.Director;
+            const director = response.director;
             const pFour = $("<p>").text("Director: " + director);
             movieDiv.append(pThree);
-            const actors = response.Actors;
+            const actors = response.actors;
             const pFive = $("<p>").text("Actors: " + actors);
             movieDiv.append(pFour);
-            const year = response.Year;
+            const year = response.year;
             const pSix = $("<p>").text("Year: " + year);
             movieDiv.append(pFive);
 
-            if (moviesHistory.includes(response.Title) === false) {
-                moviesHistory.push(response.Title);
+            if (moviesHistory.includes(response.title) === false) {
+                moviesHistory.push(response.title);
             }
 
             renderButtons()
@@ -83,7 +83,7 @@ $("#run-search").on("click", function() {
 
 //On click event listener for movie buttons
 $(document).on("click", ".movie-btn", function() {
-    movie = $(this).attr("data-Title");
+    movie = $(this).attr("data-title");
     displayMovieInfo()
 
 })
