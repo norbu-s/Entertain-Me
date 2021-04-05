@@ -10,7 +10,7 @@ function renderButtons() {
     for (var i = 0; i < moviesHistory.length; i++) {
         var a = $("<button>");
         a.addClass("btn btn-success movie-btn");
-        a.attr("data-Title", moviesHistory[i]);
+        a.attr("data-title", moviesHistory[i]);
         a.text(moviesHistory[i]);
         $(".buttons-view").prepend(a);
     }
@@ -20,17 +20,17 @@ function renderButtons() {
 
 
 // Function to display movie info
-function displayMovieTitle() {
+function displayMovieInfo() {
    
-    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
+    const queryURL = '/api/search/' + movie;
     
     $.ajax({
         url: queryURL,
         method: "GET"
       }).then(function(response) {
-        var movieDiv = $("<div class='movie'>");
-            if (moviesHistory.includes(response.Title) === false) {
-                moviesHistory.push(response.Title)
+        const movieDiv = $("<div class='movie'>");
+            if (moviesHistory.includes(response.title) === false) {
+                moviesHistory.push(response.title)
             }
             
             renderButtons()
@@ -42,8 +42,8 @@ function displayMovieTitle() {
 
 //On click event listener for movie buttons
 $(document).on("click", ".movie-btn", function () {
-    movie = $(this).attr("data-Title");
-    displayMovieTitle()
+    movie = $(this).attr("data-title");
+    displayMovieInfo()
 
 })
 
