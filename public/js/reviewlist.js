@@ -38,8 +38,13 @@ function getTitle() {
         .then((data) => {
             console.log("Success in getting movie:", data);
             title = data;
+        }).then(function(response) {
+            const movieDiv = $("<div class='title'>");
+            movieDiv.html("<h2>Movie Title</h2><br>");
+            searchText.prepend(movieDiv);
+            const title = response.title;
         });
-}
+};
 
 
 //event listerner
