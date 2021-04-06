@@ -32,7 +32,7 @@ function displayMovieInfo() {
             $(".search-data").html("");
 
             const movieDiv = $("<div class='movie'>");
-            movieDiv.html("<h4>You Want to Review</h4><br>");
+            movieDiv.html("<h4>You Want to Watch</h4><br>");
             searchText.prepend(movieDiv);
 
             const imgURL = response.Poster;
@@ -77,11 +77,7 @@ $("#run-search").on("click", function() {
     displayMovieInfo();
 });
 
-// //On click event listener for movie buttons
-// $(document).on("click", ".movie-btn", function() {
-//     movie = $(this).attr("data-title");
-//     displayMovieInfo();
-// });
+
 
 //On click event listener for clear search results button
 $("#clear-search").on("click", function() {
