@@ -70,20 +70,7 @@ function getTitle() {
       
       };
 
-// //event listerner
-// $("btn btn-danger movie-btn").on("click", function() {
-//   title = $("#search-term").val()
-//   getTitle()
-
-// })
-
-
-//On click event listener for movie buttons
-// $(document).on("click", ".movie-btn", function () {
-//   title = $("data-title").val()
-//     getTitle()
-
-// });
+//Event listener
 $(document).on("click", ".movie-btn", function () {
   title = $(this).attr("data-title");
   getTitle()
