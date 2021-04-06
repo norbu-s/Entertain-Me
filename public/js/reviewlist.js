@@ -1,6 +1,7 @@
-const movieTitle = document.getElementById("title"); //movie tile section
-var moviesHistory = []
-var movie
+let movieTitle = document.getElementById("title"); //movie tile section
+let moviesHistory = []
+let movie
+
 // Function to render buttons based on what is in moviesHistory array
 function renderButtons() {
     $(".buttons-view").empty();
@@ -14,18 +15,14 @@ function renderButtons() {
 }
 // Function to display movie info - instead of API, get values from DB
 function displayMovieTitle() {
-    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-      })
+            const url = `/api/movies/${title}`;
+            $.ajax({
+                    type: 'GET',
+                    url: url,
+                })
       .then(function(response) {
         var movieDiv = $("<div class='movie'>");
-            if (moviesHistory.includes(response.title) === false) {
-                moviesHistory.push(response.title)
-            }
-            renderButtons()
-            //console.log(moviesHistory[2]);
+
         })
 };
 //On click event listener for movie buttons
@@ -37,6 +34,15 @@ $(document).on("click", ".movie-btn", function () {
     movieTitle.value = movie;
     console.log("movie", movie);
 })
+
+// //On click event listener for clear the movie in the review form button
+$("#clear-review").on("click", function() {
+    $("data-title").empty();
+    //refresh page
+    location.reload();
+});
+
+
 //To run when document loads (if/else statement that will pull from local storage only if the value is not "null")
 $(document).ready(function() {
     if(localStorage.getItem("movies") !== null) {
@@ -48,79 +54,7 @@ $(document).ready(function() {
     renderButtons()
   })
 
-// const movieTitle = document.getElementById("title"); //movie tile section
-// let searchText = $(".search-data")
-// let moviesHistory = []
-// let movie
 
-// // Function to render buttons based on what is in moviesHistory array
-// function renderButtons() {
-//     $(".buttons-view").empty();
-//     for (var i = 0; i < moviesHistory.length; i++) {
-//         var a = $("<button>");
-//         a.addClass("btn btn-success movie-btn");
-//         a.attr("data-Title", moviesHistory[i]);
-//         a.text(moviesHistory[i]);
-//         $(".buttons-view").prepend(a);
-//     }
-// }
-// // Function to display movie info - instead of API, get values from DB
-//         let title;
-
-//         function getTitle() {
-//             const url = `/api/movies/${title}`;
-//             $.ajax({
-//                     type: 'GET',
-//                     url: url,
-//                 })
-
-//                 .then(function(response) {
-//                 $(".search-data").html("");
-
-//                 const movieDiv = $("<div class='movie'>");
-//                 searchText.prepend(movieDiv);
-//                 const title = response.title;
-//                 const pOne = $("<h2>").text(title);
-//                 movieDiv.append(pOne);
-
-//                 })
-//             };
-
-// //On click event listener for movie buttons
-// $(document).on("click", ".movie-btn", function () {
-//     title = $(this).attr("data-title");
-//     getTitle()
-//     // console.log("movie button clicked", title);
-//     // //to add the movie title into review page
-//     // movieTitle.value = title;
-//     // console.log("movie", title);
-// })
-
-// // //On click event listener for movie buttons
-// // $(document).on("click", ".movie-btn", function() {
-// //     title = $(this).attr("data-title");
-// //     getTitle();
-// // });
-
-
-// //On click event listener for clear the movie in the review form button
-// $("#clear-review").on("click", function() {
-//     $("data-title").empty();
-//     //refresh page
-//     location.reload();
-// });
-
-
-// //To run when document loads (if/else statement that will pull from local storage only if the value is not "null")
-// $(document).ready(function() {
-//     if(localStorage.getItem("movies") !== null) {
-//         var savedMovie = localStorage.getItem("movies");
-//         var pushMovies = JSON.parse(savedMovie)
-//         moviesHistory = moviesHistory.concat(pushMovies)
-//     }
-//     //render buttons
-//     renderButtons()
-//   })
 
 
 // let searchText = $(".search-data")
