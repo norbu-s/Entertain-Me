@@ -1,6 +1,7 @@
-var searchText = $(".search-data")
-var moviesHistory = []
+let searchText = $(".search-data")
+let moviesHistory = []
 let movie;
+
 
 
 // Function to set movies from MoviesHistory array into local storage
@@ -24,61 +25,40 @@ function renderButtons() {
 
 
 //  //UPDATE THE BELOW FUNCTION TO PULL THE MOVIE TITLE FROM THE DB - SAVING REVIEW WORKS WITHOUT THIS
-//   // Get a specific review
-//   const getMovieTitle = (id) => {
-//     fetch(`/api/movies/${id}`, {
-//       method: "GET",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         if (data) {
-//           console.log(`Success in grabbing movie ${id}`, data);
+//   // Get a specific movie
 
-//           // Populate the form with the existing movie title
-//           titleInput.value = data.title;
- 
+let title;
 
-//           updating = true;
-//         }
-//       })
-//       .catch((error) => {
-//         console.error("Error:", error);
-//       });
-//   };
+function getTitle() {
+    const url = `/api/movies/${title}`;
+    $.ajax({
+            type: 'GET',
+            url: url,
+        })
+        .then((data) => {
+            console.log("Success in getting movie:", data);
+            title = data;
+        }).then(function(response) {
+            const movieDiv = $("<div class='title'>");
+            movieDiv.html("<h2>Movie Title</h2><br>");
+            searchText.prepend(movieDiv);
+            const title = response.title;
+        });
+};
 
 
+//event listerner
+$("btn btn-danger movie-btn").on("click", function() {
+    title = $("#search-term").val()
+    getTitle()
 
-
-
-//function to pull movies from database
-
-const getMovie = (title) => {
-    fetch(`/api/movies/${title}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data) {
-          console.log(`Success in grabbing movie ${title}`, data);
-        };
-    })
-}
-
-
-
+})
 
 //On click event listener for movie buttons
 $(document).on("click", ".movie-btn", function() {
-    movie = $(this).attr("data-title");
-    getMovie()
-
-})
+    title = $(this).attr("data-title");
+    getTitle();
+});
 
 
 
