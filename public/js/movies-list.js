@@ -36,7 +36,7 @@ function getTitle() {
           $("data-title").html("");
 
           const movieDiv = $("<div class='movie'>");
-          movieDiv.html("<h4>You Want to Review</h4><br>");
+          movieDiv.html("<h4>You Want to Watch</h4><br>");
           searchText.prepend(movieDiv);
 
           const imgURL = response.Poster;
@@ -70,20 +70,7 @@ function getTitle() {
       
       };
 
-// //event listerner
-// $("btn btn-danger movie-btn").on("click", function() {
-//   title = $("#search-term").val()
-//   getTitle()
 
-// })
-
-
-//On click event listener for movie buttons
-// $(document).on("click", ".movie-btn", function () {
-//   title = $("data-title").val()
-//     getTitle()
-
-// });
 $(document).on("click", ".movie-btn", function () {
   title = $(this).attr("data-title");
   getTitle()
