@@ -77,11 +77,11 @@ $("#run-search").on("click", function() {
     displayMovieInfo();
 });
 
-//On click event listener for movie buttons
-$(document).on("click", ".movie-btn", function() {
-    movie = $(this).attr("data-title");
-    displayMovieInfo();
-});
+// //On click event listener for movie buttons
+// $(document).on("click", ".movie-btn", function() {
+//     movie = $(this).attr("data-title");
+//     displayMovieInfo();
+// });
 
 //On click event listener for clear search results button
 $("#clear-search").on("click", function() {
