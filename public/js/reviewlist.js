@@ -36,7 +36,7 @@ function getTitle() {
         })
 
         .then(function(response) {
-          $("data-title").html("");
+          $(".search-data").html("");
 
           const movieDiv = $("<div class='movie'>");
           movieDiv.html("<h4>You Want to Review</h4><br>");
