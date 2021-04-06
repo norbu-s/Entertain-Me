@@ -52,11 +52,20 @@
             <div class="col-md-3">
                 <h3 class="display-8">My Movie List</h3>
                 <div class="buttons-view"></div>
+
             </div>
+
             <div class="col-md-5 offset-md-3">
                 <form id="addreview">
                     <div class="form-group">
-                        <div class='title'></div>
+                        <button type="submit" class="btn btn-secondary" id="clear-review">
+                            Clear Movie</button>
+                            <br>
+                        <label for="title">Movie Title:</label>
+                        <input defaultValue="search-data" class="form-control" input id="title">
+
+                        
+                        <div class="search-data"></div>
                         <label for="review">Review:</label>
                         <textarea class="form-control" rows="10" id="review"></textarea>
                         <br />

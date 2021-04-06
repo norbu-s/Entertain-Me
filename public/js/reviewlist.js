@@ -2,12 +2,14 @@ let searchText = $(".search-data")
 let moviesHistory = []
 let movie;
 
+// let formTitle = document.getElementById("search-data").defaultValue; 
 
 
-// Function to set movies from MoviesHistory array into local storage
-function saveMovies() {
-    localStorage.setItem("movies", JSON.stringify(moviesHistory));
-}
+
+// // Function to set movies from MoviesHistory array into local storage
+// function saveMovies() {
+//     localStorage.setItem("movies", JSON.stringify(moviesHistory));
+// }
 
 
 
@@ -24,9 +26,8 @@ function renderButtons() {
 }
 
 
-//  //UPDATE THE BELOW FUNCTION TO PULL THE MOVIE TITLE FROM THE DB - SAVING REVIEW WORKS WITHOUT THIS
-//   // Get a specific movie
 
+// //   // Get a specific movie
 let title;
 
 function getTitle() {
@@ -35,24 +36,28 @@ function getTitle() {
             type: 'GET',
             url: url,
         })
-        .then((data) => {
-            console.log("Success in getting movie:", data);
-            title = data;
-        }).then(function(response) {
-            const movieDiv = $("<div class='title'>");
-            movieDiv.html("<h2>Movie Title</h2><br>");
-            searchText.prepend(movieDiv);
-            const title = response.title;
-        });
-};
+
+        .then(function(response) {
+          $(".search-data").html("");
+
+          const movieDiv = $("<div class='movie'>");
+          searchText.prepend(movieDiv);
+          const title = response.title;
+          const pOne = $("<h2>").text(title);
+          movieDiv.append(pOne);
+          
 
 
-//event listerner
-$("btn btn-danger movie-btn").on("click", function() {
-    title = $("#search-term").val()
-    getTitle()
+        })
+      };
 
-})
+
+    //   function populate(el) {
+    //     document.getElementById('data-title').value= 
+    //     document.getElementById(el.id).firstChild.nodeValue;
+    //     }
+
+
 
 //On click event listener for movie buttons
 $(document).on("click", ".movie-btn", function() {
@@ -60,7 +65,12 @@ $(document).on("click", ".movie-btn", function() {
     getTitle();
 });
 
-
+//On click event listener for clear the movie in the review form button
+$("#clear-review").on("click", function() {
+    $("data-title").empty();
+    //refresh page
+    location.reload();
+});
 
 //To run when document loads (if/else statement that will pull from local storage only if the value is not "null")
 $(document).ready(function() {
