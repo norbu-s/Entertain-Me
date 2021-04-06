@@ -6,7 +6,7 @@ The benefit of the site is that it is an easy way for users to keep a log of mov
 
 
 <br> <b>See Deployed Application Link: </b>
-<a href="https://arcane-badlands-48936.herokuapp.com/"> EntertainMe </a>
+<a href="https://arcane-basin-25854.herokuapp.com/index.html"> EntertainMe </a>
 
 
 <br> <b>See Presentation Link Link: </b>
