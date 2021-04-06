@@ -2,12 +2,14 @@ let searchText = $(".search-data")
 let moviesHistory = []
 let movie;
 
+// let formTitle = document.getElementById("search-data").defaultValue; 
 
 
-// Function to set movies from MoviesHistory array into local storage
-function saveMovies() {
-    localStorage.setItem("movies", JSON.stringify(moviesHistory));
-}
+
+// // Function to set movies from MoviesHistory array into local storage
+// function saveMovies() {
+//     localStorage.setItem("movies", JSON.stringify(moviesHistory));
+// }
 
 
 
@@ -24,8 +26,8 @@ function renderButtons() {
 }
 
 
-//  //UPDATE THE BELOW FUNCTION TO PULL THE MOVIE TITLE FROM THE DB - SAVING REVIEW WORKS WITHOUT THIS
-//   // Get a specific movie
+
+// //   // Get a specific movie
 let title;
 
 function getTitle() {
@@ -39,10 +41,7 @@ function getTitle() {
           $(".search-data").html("");
 
           const movieDiv = $("<div class='movie'>");
-          movieDiv.html("<h4>You Want to Review</h4><br>");
           searchText.prepend(movieDiv);
-
-
           const title = response.title;
           const pOne = $("<h2>").text(title);
           movieDiv.append(pOne);
@@ -52,6 +51,11 @@ function getTitle() {
         })
       };
 
+
+    //   function populate(el) {
+    //     document.getElementById('data-title').value= 
+    //     document.getElementById(el.id).firstChild.nodeValue;
+    //     }
 
 
 
