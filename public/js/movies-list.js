@@ -33,7 +33,7 @@ function getTitle() {
         })
 
         .then(function(response) {
-          $("data-title").html("");
+          $(".search-data").html("");
 
           const movieDiv = $("<div class='movie'>");
           movieDiv.html("<h4>You Want to Watch</h4><br>");
@@ -70,7 +70,20 @@ function getTitle() {
       
       };
 
+// //event listerner
+// $("btn btn-danger movie-btn").on("click", function() {
+//   title = $("#search-term").val()
+//   getTitle()
 
+// })
+
+
+//On click event listener for movie buttons
+// $(document).on("click", ".movie-btn", function () {
+//   title = $("data-title").val()
+//     getTitle()
+
+// });
 $(document).on("click", ".movie-btn", function () {
   title = $(this).attr("data-title");
   getTitle()
