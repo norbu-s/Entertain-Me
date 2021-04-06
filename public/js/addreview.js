@@ -7,24 +7,40 @@ document.addEventListener("DOMContentLoaded", (e) => {
   let reviewId;
   let updating = false;
 
+  // Get a specific review
+  const getReviewData = (id) => {
+    fetch(`/api/reviews/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          console.log(`Success in grabbing review ${id}`, data);
 
+          // Populate the form with the existing post
+          titleInput.value = data.title;
+          reviewInput.value = data.review;
+          ratingInput.value = data.rating;
+          authorInput.value = data.author;
+          reviewSourceSelect.value = data.source;
 
+          updating = true;
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
-  
+  // Extract the review ID from the URL
+  if (url.indexOf("?review_id=") !== -1) {
+    reviewId = url.split("=")[1];
+    getReviewData(reviewId);
+  }
 
- 
-
-  // // Extract the review ID from the URL
-  // if (url.indexOf("?review_id=") !== -1) {
-  //   reviewId = url.split("=")[1];
-  //   getReviewData(reviewId);
-  // }
-
-
-
-
-
-  //NECESSARY CODE TO SAVE REVIEWS
   // Get elements from the page
 
   const reviewInput = document.getElementById("review");
